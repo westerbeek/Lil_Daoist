@@ -56,8 +56,44 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\scripts\adventures\walkymantrigger.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\Foundatin\MindpreperationStage.cs" />
+    <Compile Include="Assets\old shit\RectTransformExtensions.cs" />
+    <Compile Include="Assets\scripts\adventures\pathdestroy.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\UImanager.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\skills.cs" />
+    <Compile Include="Assets\old shit\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\scripts\adventures\adventuring.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\QiAbsorbtionstage\QiSensing\QiSensingStage.cs" />
+    <Compile Include="Assets\scripts\camerashake.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\Player.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\QiAbsorbtionstage\QiAbsorptionRhuncollision.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\Foundatin\BodypreperationStage.cs" />
+    <Compile Include="Assets\scripts\Mousetrail.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\stats.cs" />
+    <Compile Include="Assets\old shit\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\scripts\UILock.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\QiAbsorbtionstage\UICollisiontrigger.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\QiAbsorbtionstage\QiSensing\Qisensingtrigger.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\Cultivation.cs" />
+    <Compile Include="Assets\scripts\Rhuns.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\QiAbsorbtionstage\QiAbsorptionStage.cs" />
+    <Compile Include="Assets\scripts\Dragable.cs" />
+    <Compile Include="Assets\scripts\cultivationminigame\QiRefiningStage.cs" />
+    <Compile Include="Assets\scripts\UI\DropShadow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\text\Adventures\Adventuredesert.txt" />
+    <None Include="Assets\text\Adventures\ideas.txt" />
+    <None Include="Assets\text\Adventures\Adventurecity.txt" />
+    <None Include="Assets\text\Adventures\Adventuremountain.txt" />
+    <None Include="Assets\text\Adventures\Adventuresplanes.txt" />
+    <None Include="Assets\text\cultivationranksinfo.txt" />
+    <None Include="Assets\text\Adventures\Adventuretown.txt" />
+    <None Include="Assets\text\Adventures\Adventuresforest.txt" />
+    <None Include="Assets\text\skillinfotext.txt" />
+    <None Include="Assets\text\Adventures\Adventuretundra.txt" />
+    <None Include="Assets\Fantasy Skybox FREE\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
