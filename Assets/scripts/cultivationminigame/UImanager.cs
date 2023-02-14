@@ -17,6 +17,7 @@ public class UImanager : MonoBehaviour
     public bool pulse;
     //bgenclosure
     public GameObject enclosurecanvasobj;
+    
     //Maincanvass
     public GameObject maincanvasobj;
     public bool inforealmbool;
@@ -74,6 +75,9 @@ public class UImanager : MonoBehaviour
     public GameObject adventurecam;
     public GameObject adventuringcanvas;
     public Text Progressionbartxt;
+    //
+    public GameObject inventorycanvas;
+    public bool invbool;
 
     // Start is called before the first frame update
     void Start()
@@ -165,6 +169,12 @@ public class UImanager : MonoBehaviour
             adventurecam.SetActive(false);
             adventuringcanvas.SetActive(false);
             adventureactivate.SetActive(false);
+        }
+        //Inventory
+        inventorycanvas = GameObject.Find("invequip");
+        if(inventorycanvas != null)
+        {
+            inventorycanvas.SetActive(false);
         }
 
     }
@@ -349,6 +359,16 @@ public class UImanager : MonoBehaviour
       // maincanvasobj.SetActive(!adventurebool);
 
     }
+    public void Playerinv()
+    {
+        invbool = inventorycanvas.activeSelf;
+        enclosurecanvasobj.SetActive(invbool);
+        maincanvasobj.SetActive(invbool);
+
+        inventorycanvas.SetActive(!invbool);
+       
+
+    }
     public void cultivationbutton()
     {
 
@@ -356,6 +376,8 @@ public class UImanager : MonoBehaviour
         cross.gameObject.SetActive(scripthub.GetComponent<Cultivation>().Cultivate);
 
     }
+
+  
     public void realminfo()
     {
         realminfoimage.SetActive(true);

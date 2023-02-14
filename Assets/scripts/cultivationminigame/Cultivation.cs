@@ -8,44 +8,44 @@ public class Cultivation : MonoBehaviour
     public GameObject scripthub;
 
     [SerializeField]private int realm;
-    public int Realm { get; set; }
+    public int Realm{ get { return realm; }set { realm = value; }}
     [SerializeField]private string realmname;
-    public string Realmname { get; set; }
+    public string Realmname { get { return realmname; } set { realmname = value; } }
     [SerializeField] private int subrealm;
-    public int Subrealm { get; set; }
+    public int Subrealm { get { return subrealm; } set { subrealm = value; } }
     [SerializeField] private string subrealmname;
-    public string Subrealmname { get; set; }
+    public string Subrealmname { get { return subrealmname; } set { subrealmname = value; } }
     [SerializeField] private int maxsubrealm;
-    public int Maxsubrealm { get; set; }
+    public int Maxsubrealm { get { return maxsubrealm; } set { maxsubrealm = value; } }
     [SerializeField] private float xp;
-    public float Xp{ get; set; }
+    public float Xp { get { return xp; } set { xp = value; } }
     [SerializeField] private float xpbonus;
-    public float Xpbonus{ get; set; }
+    public float Xpbonus { get { return xpbonus; } set { xpbonus = value; } }
     [SerializeField] private float maxxp;
-    public float Maxxp { get; set; }
+    public float Maxxp { get { return maxxp; } set { maxxp = value; } }
 
     [SerializeField] private bool cultivate;
-    public bool Cultivate{ get; set; }
+    public bool Cultivate {get { return cultivate; } set { cultivate = value; }
+    }
 
 
     [SerializeField] private GameObject[] cultgames;
-    public GameObject[] Cultgames { get; set; }
+    public GameObject[] Cultgames { get { return cultgames; } set { cultgames = value; } }
     [SerializeField] private int cultgamenumber;
-    public int Cultgamenumber { get; set; }
+    public int Cultgamenumber { get { return cultgamenumber; } set { cultgamenumber = value; } }
     [SerializeField] private Image screenoutline;
-    public Image Screenoutline { get; set; }
+    public Image Screenoutline { get { return screenoutline; } set { screenoutline = value; } }
 
 
     [SerializeField] private bool breakthroughable;
-    public bool Breakthroughable { get; set; }
+    public bool Breakthroughable { get { return breakthroughable; } set { breakthroughable = value; } }
     // Start is called before the first frame update
     void Start()
     {
         scripthub = GameObject.Find("ScriptHub");
-        cultivate = false;
+        //cultivate = false;
         
         maxxp = 9899;
-
     }
 
     // Update is called once per frame

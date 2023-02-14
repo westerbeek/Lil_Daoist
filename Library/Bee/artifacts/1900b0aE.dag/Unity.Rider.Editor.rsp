@@ -109,7 +109,7 @@
 -define:TEST_FRAMEWORK
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"E:/Schooljaar_2021_2022/BeepyMemoryUnity/Lil_Daoist/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
+-r:"E:/backup/gamedev&des/unity/unitygames/Githublildaoist/Lil_Daoist/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
 -r:"E:/Unity/Editor/2021.1.25f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 -r:"E:/Unity/Editor/2021.1.25f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"E:/Unity/Editor/2021.1.25f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
