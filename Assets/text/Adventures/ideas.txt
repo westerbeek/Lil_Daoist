@@ -1,0 +1,9 @@
+creatures----
+walking grave
+bone smith
+
+areas/events----
+soulless pit
+tower of wraith
+star of death
+necropolis(a way to contact the god of death)
