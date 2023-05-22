@@ -206,7 +206,7 @@ public class Cultivation : MonoBehaviour
     }
     public void realmbreakthrough()
     {
-
+        //add breakthrough minigame TODO
     }
    
  
@@ -222,7 +222,7 @@ public class Cultivation : MonoBehaviour
     {
         GameObject ui = GameObject.Find("UIhub");
 
-        scripthub.GetComponent<stats>().inspirationxp += gift;
+        scripthub.GetComponent<Player>().inspirationxp += gift;
         //ui.GetComponent<UImanager>().bgreward();
 
     }

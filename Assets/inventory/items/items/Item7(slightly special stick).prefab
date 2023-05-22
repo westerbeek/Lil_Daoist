@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7778535254091753555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7778535254091753549}
+  - component: {fileID: 804949343548457780}
+  m_Layer: 0
+  m_Name: Item7(slightly special stick)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7778535254091753549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778535254091753555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00024414062, y: 423.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &804949343548457780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778535254091753555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd6f1c597c1e8446a0b25351dced920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 7
+  name: Slightly special stick
+  Quality: 2
+  rarity: 3
+  stackable: 0
+  amount: 0
+  maxamount: 1
+  description: A slightly special stick, you feel some energy coming from it.
+  icon: {fileID: 21300000, guid: 1b56c8562b8330e4ea2e4f8fffe421b5, type: 3}
+  type: 3
+  subtype1: 5
+  subtype2: 0
+  subtype3: 0
+  fortitude: 0
+  strength: 0
+  dexterity: 0
+  inteligence: 0
+  karma: 0
+  luck: 0
+  xpbonus: 0.01
+  physicalattack: 0
+  physicaldefence: 0
+  mentalattack: 0
+  mentaldefence: 0
+  specialattack: 0
+  specialdefence: 0
+  fireattack: 0
+  firedefence: 0
+  waterattack: 0
+  waterdefence: 1
+  woodattack: 3
+  wooddefence: 0
+  earthattack: 0
+  earthdefence: 0
+  metalattack: 0
+  metaldefence: 0

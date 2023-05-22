@@ -25,9 +25,12 @@ public class BodypreperationStage : MonoBehaviour
     {
         // Debug.Log("displaydis shit");
         filledprogression.fillAmount = progression / progressionmaximum;
-        if (scripthub.GetComponent<Player>().playeranimation != null)
+        for (int i = 0; i < scripthub.GetComponent<Player>().playeranimation.Length; i++)
         {
-            scripthub.GetComponent<Player>().playeranimation.SetFloat("pushupfloat", progression / 10f);
+            if (scripthub.GetComponent<Player>().playeranimation[i] != null)
+            {
+                scripthub.GetComponent<Player>().playeranimation[i].SetFloat("pushupfloat", progression / 10f);
+            }
         }
         if (progression >= progressionmaximum)
         {
@@ -55,13 +58,16 @@ public class BodypreperationStage : MonoBehaviour
         progression = 0;
         if (scripthub.GetComponent<Player>().playeranimation != null)
         {
-            if (scripthub.GetComponent<Player>().playeranimation.GetCurrentAnimatorStateInfo(0).IsName("pushup"))//todo
+            for (int i = 0; i < scripthub.GetComponent<Player>().playeranimation.Length; i++)
             {
-                // scripthub.GetComponent<Player>().playeranimation.speed = 0;
+                if (scripthub.GetComponent<Player>().playeranimation[i].GetCurrentAnimatorStateInfo(0).IsName("pushup"))//todo
+                {
+                    // scripthub.GetComponent<Player>().playeranimation.speed = 0;
+                }
             }
         }
     }
-        public void kneeup()
+    public void kneeup()
     {
         progression++;
     }

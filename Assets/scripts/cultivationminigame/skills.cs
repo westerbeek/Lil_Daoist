@@ -81,7 +81,7 @@ public class skills : MonoBehaviour
     public void skillz(GameObject nameofskill)
     {
         
-       stats statobj = GameObject.Find("ScriptHub").GetComponent<stats>();
+       stats statobj = GameObject.Find("ScriptHub").GetComponent<Player>();
        UImanager UI = GameObject.Find("UIhub").GetComponent<UImanager>();
         string skillname = nameofskill.name;
         if(skillname == "Cultivationskill")//0

@@ -32,7 +32,7 @@ public class Rhuns : MonoBehaviour
     }
     public void onpointer(GameObject name)
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)||  Input.touchCount > 0)
         {
             Destroy(name);
         }

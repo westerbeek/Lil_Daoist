@@ -17,7 +17,7 @@ public class Mousetrail : MonoBehaviour
     void Update()
     {
         trail.transform.position = camera.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-        if (Input.GetMouseButton(0)){
+        if (Input.GetMouseButton(0) ||  Input.touchCount > 0){
             trail.SetActive(true);
         }
         else{

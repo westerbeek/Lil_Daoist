@@ -22,7 +22,7 @@ public class camerashake : MonoBehaviour
     void Awake()
     {
         
-        camTransform = GameObject.Find("Main Camera").transform;
+        //camTransform = GameObject.Find("Main Camera").transform;
         if (camTransform == null)
         {
             camTransform = GetComponent(typeof(Transform)) as Transform;

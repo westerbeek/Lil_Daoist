@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
+
 public class UImanager : MonoBehaviour
 {
     public GameObject scripthub;
@@ -21,6 +24,9 @@ public class UImanager : MonoBehaviour
     //Maincanvass
     public GameObject maincanvasobj;
     public bool inforealmbool;
+    private bool cultivatable;
+
+    public Image cultbuttonimage;
     public Image cross;//of cultivation button
     public Text realmtxt;
     public Text realminfotxt;
@@ -69,18 +75,27 @@ public class UImanager : MonoBehaviour
     public bool purchasingbool;
 
     //adventure canvas
+    public GameObject adventuremodeobj;
     public GameObject adventurecanvas;
     public bool adventurebool;
     public GameObject adventureactivate;
     public GameObject adventurecam;
     public GameObject adventuringcanvas;
     public Text Progressionbartxt;
-    //
+    public GameObject Adventurechoices;
+    public bool choicesenable;
+    public adventureeventhub adeventhub;
+    public string eventtype;
+    //inv
     public GameObject inventorycanvas;
+    public Inventory inv;
+    public Equipment equip;
     public bool invbool;
-
+    //rewardscreen
+    public GameObject rewardcanvas;
+    public rewards rewardscript;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         scripthub = GameObject.Find("ScriptHub");
         maincam = GameObject.Find("Main Camera");
@@ -101,6 +116,7 @@ public class UImanager : MonoBehaviour
         realmtxt = GameObject.Find("realmname").GetComponent<Text>();
         realminfotxt = GameObject.Find("realminfo").GetComponent<Text>();
         cultbutton = GameObject.Find("CultivationbuttonTemp");
+        cultbuttonimage = GameObject.Find("CultivationbuttonTemp").GetComponent<Image>(); ;
 
         upinfo = GameObject.Find("Upinforlm");
         downinfo = GameObject.Find("Downinforlm");
@@ -155,26 +171,103 @@ public class UImanager : MonoBehaviour
             playerskillbool = false;
             playerskillscanvas.SetActive(false);
         }
-  
 
-    //adventure
+
+        //adventure
+        adventuremodeobj = GameObject.Find("adventuremodescripts");
+
         adventurecanvas = GameObject.Find("Adventurecanvas");
         adventurecam = GameObject.Find("adventurecam");
         adventureactivate = GameObject.Find("adventurepaths");
         adventuringcanvas = GameObject.Find("Adventuringwalkcanvas");
-        if(adventurecanvas != null)
+        Adventurechoices = GameObject.Find("choices");
+        choicesenable = false;
+        adeventhub = GameObject.Find("adventuremodescripts").GetComponent<adventureeventhub>();
+        adeventhub.UIhub = this;
+        if (adventurecanvas != null)
         {
             adventurebool = false;
             adventurecanvas.SetActive(false);
             adventurecam.SetActive(false);
             adventuringcanvas.SetActive(false);
             adventureactivate.SetActive(false);
+            Adventurechoices.SetActive(false);
+            
         }
         //Inventory
-        inventorycanvas = GameObject.Find("invequip");
-        if(inventorycanvas != null)
+        inv = this.gameObject.GetComponent<Inventory>();
+
+        inv.equipmentslotimages = new Image[17];
+        inv.equipslots = new GameObject[17];
+        for (int i = 1; i <= inv.equipmentslotimages.Length; i++)
         {
-            inventorycanvas.SetActive(false);
+            string n = "EquipIcon" + i + "";
+            //Debug.Log(n);
+            inv.equipmentslotimages[i - 1] = GameObject.Find(n).GetComponent<Image>();
+            inv.equipslots[i - 1] = inv.equipmentslotimages[i - 1].transform.parent.gameObject;
+            // inv.slots[i - 1] = GameObject.Find(n).transform.parent.gameObject;
+        }
+        
+         inventorycanvas = GameObject.Find("invequip");
+        if (inv != null)
+        {
+            inv.slotimages = new Image[20];
+            inv.slots = new GameObject[20];
+            inv.itemdatabase = GameObject.Find("ItemDatabaseObj").GetComponent<ItemDatabase>();
+
+            for (int i = 1; i <= inv.slotimages.Length; i++)
+            {
+                string n = "Invicon" + i + "";
+                //Debug.Log(n);
+                inv.slotimages[i-1] = GameObject.Find(n).GetComponent<Image>();
+                inv.slots[i - 1] = GameObject.Find(n).transform.parent.gameObject;
+            }
+            if (inventorycanvas != null)
+            {
+                inventorycanvas.SetActive(false);
+            }
+        }
+        //Rewards
+        if (rewardcanvas == null)
+        {
+            rewardcanvas = GameObject.Find("Rewardscanvas");
+            rewardscript = this.GetComponent<rewards>();
+            rewardscript.revealcanvas = GameObject.Find("Rewardscanvas");
+
+            rewardscript.itemdatabase = GameObject.Find("ItemDatabaseObj").GetComponent<ItemDatabase>();
+            rewardscript.inv = this.gameObject.GetComponent<Inventory>();
+            rewardscript.reveal = GameObject.Find("Revealanimscreen");
+            rewardscript.itemicons = new Image[21];
+            rewardscript.slots = new GameObject[21];
+            rewardscript.itemsinreveal = new Item[21];
+            rewardscript.itemdiscardscreen = GameObject.Find("rewards");
+            for (int i = 1; i <= 10; i++)
+            {
+                string n = "Revealslots" + i + "";
+                string p = "revealicon" + i + "";
+                int f = i - 1;
+                //Debug.Log(n);
+                rewardscript.slots[f] = GameObject.Find(n);
+                rewardscript.itemicons[f] = GameObject.Find(n).transform.Find(p).GetComponent<Image>();
+                int index = f;
+                rewardscript.slots[index].GetComponent<Button>().onClick.AddListener(() => rewardscript.switchbutton(index));
+                //inv.slots[i - 1] = GameObject.Find(n).transform.parent.gameObject;
+            }
+            for (int i = 11; i <= 20; i++)
+            {
+                int D = i - 10;
+                string n = "DisgardSlot" + D + "";
+                string p = "Disgardicon" + D + "";
+                //Debug.Log(n);
+                rewardscript.slots[i - 1] = GameObject.Find(n);
+
+                rewardscript.itemicons[i - 1] = GameObject.Find(n).transform.Find(p).GetComponent<Image>();
+                int index = D;
+                rewardscript.slots[index].GetComponent<Button>().onClick.AddListener(() => rewardscript.switchbutton(index));
+                //inv.slots[i - 1] = GameObject.Find(n).transform.parent.gameObject;
+            }
+            rewardscript.reveal.SetActive(false);
+            rewardcanvas.SetActive(false);
         }
 
     }
@@ -201,6 +294,15 @@ public class UImanager : MonoBehaviour
     {
         maincanvas();
         skillpointupdate();
+
+        if(adventureactivate.activeSelf == true)
+        {
+            cultivatable = false;
+        }
+        else
+        {
+            cultivatable = true;
+        }
         if(purchasingbool == true)
         {
             skillinfopurchase();
@@ -210,8 +312,8 @@ public class UImanager : MonoBehaviour
     {
         float xp = scripthub.GetComponent<Cultivation>().Xp;
         float maxxp = scripthub.GetComponent<Cultivation>().Maxxp;
-        float inspirxp = scripthub.GetComponent<stats>().inspirationxp;
-        float maxinspirxp = scripthub.GetComponent<stats>().maxinspirationxp;
+        float inspirxp = scripthub.GetComponent<Player>().inspirationxp;
+        float maxinspirxp = scripthub.GetComponent<Player>().maxinspirationxp;
         inspirationbar.fillAmount = inspirxp / maxinspirxp;
         mainBar.fillAmount = xp / maxxp;
 
@@ -224,7 +326,7 @@ public class UImanager : MonoBehaviour
         xp = Mathf.Round(xp * 10.0f) * 0.01f;
         maxxp = Mathf.Round(maxxp * 10.0f) * 0.01f;
 
-        inspirationbartxt.text = ""+ inspirxp / maxinspirxp * 100 + "%      "+ Math.Round(scripthub.GetComponent<stats>().inspirationxp) + " / "+ Math.Round(scripthub.GetComponent<stats>().maxinspirationxp) +"";
+        inspirationbartxt.text = ""+ inspirxp / maxinspirxp * 100 + "%      "+ Math.Round(scripthub.GetComponent<Player>().inspirationxp) + " / "+ Math.Round(scripthub.GetComponent<Player>().maxinspirationxp) +"";
         Progressionbartxt.text = ""+ xp / maxxp * 100 + "%      "+ Math.Round(scripthub.GetComponent<Cultivation>().Xp, 2) + " / "+ Math.Round(scripthub.GetComponent<Cultivation>().Maxxp, 2) +"";
         //Progressionbartxt.text = ""+ xp / maxxp * 100 + "%      "+ Math.Round(scripthub.GetComponent<Cultivation>().Xp, 2) + " / "+ Math.Round(scripthub.GetComponent<Cultivation>().Maxxp, 2) +"";
     }
@@ -241,10 +343,10 @@ public class UImanager : MonoBehaviour
     }
     public void skillpointupdate()
     {
-        float inspirxp = scripthub.GetComponent<stats>().inspirationxp;
-        float maxinspirxp = scripthub.GetComponent<stats>().maxinspirationxp;
-        float inspirationpoints = scripthub.GetComponent<stats>().upgragepoints;
-        skillinspirpercentage.text = "" + inspirxp / maxinspirxp * 100 + "%      " + Math.Round(scripthub.GetComponent<stats>().inspirationxp) + " / " + Math.Round(scripthub.GetComponent<stats>().maxinspirationxp) + "";
+        float inspirxp = scripthub.GetComponent<Player>().inspirationxp;
+        float maxinspirxp = scripthub.GetComponent<Player>().maxinspirationxp;
+        float inspirationpoints = scripthub.GetComponent<Player>().upgragepoints;
+        skillinspirpercentage.text = "" + inspirxp / maxinspirxp * 100 + "%      " + Math.Round(scripthub.GetComponent<Player>().inspirationxp) + " / " + Math.Round(scripthub.GetComponent<Player>().maxinspirationxp) + "";
         inspirskillbar.fillAmount = inspirxp / maxinspirxp;
 
 
@@ -258,10 +360,10 @@ public class UImanager : MonoBehaviour
         playerskillscanvas.SetActive(playerskillbool);
         maincanvasobj.SetActive(!playerskillbool);
 
-        float inspirxp = scripthub.GetComponent<stats>().inspirationxp;
-        float maxinspirxp = scripthub.GetComponent<stats>().maxinspirationxp;
-        float inspirationpoints = scripthub.GetComponent<stats>().upgragepoints;
-        skillinspirpercentage.text = "" + inspirxp / maxinspirxp * 100 + "%      " + Math.Round(scripthub.GetComponent<stats>().inspirationxp) + " / " + Math.Round(scripthub.GetComponent<stats>().maxinspirationxp) + "";
+        float inspirxp = scripthub.GetComponent<Player>().inspirationxp;
+        float maxinspirxp = scripthub.GetComponent<Player>().maxinspirationxp;
+        float inspirationpoints = scripthub.GetComponent<Player>().upgragepoints;
+        skillinspirpercentage.text = "" + inspirxp / maxinspirxp * 100 + "%      " + Math.Round(scripthub.GetComponent<Player>().inspirationxp) + " / " + Math.Round(scripthub.GetComponent<Player>().maxinspirationxp) + "";
         inspirskillbar.fillAmount = inspirxp / maxinspirxp;
 
         
@@ -298,13 +400,13 @@ public class UImanager : MonoBehaviour
     {
         skills skillz = scripthub.GetComponent<skills>();
       
-        if (scripthub.GetComponent<stats>().upgragepoints >= skillz.skillspointcost[sellectecskill])
+        if (scripthub.GetComponent<Player>().upgragepoints >= skillz.skillspointcost[sellectecskill])
         {
             purchasing += Time.deltaTime;
             buyfill.fillAmount = purchasing / maxpurchasing;
             if (purchasing >= maxpurchasing)
             {
-                scripthub.GetComponent<stats>().upgragepoints -= skillz.skillspointcost[sellectecskill];
+                scripthub.GetComponent<Player>().upgragepoints -= skillz.skillspointcost[sellectecskill];
                 skillz.skillslvl[sellectecskill]++;
                 skillvltxt.text = "" + skillz.skillslvl[sellectecskill] + "";
 
@@ -328,11 +430,11 @@ public class UImanager : MonoBehaviour
 
         if (playerinfobool == true)
         {
-            playername.text = "Health:"+ scripthub.GetComponent<stats>().health+" / "+ scripthub.GetComponent<stats>().maxhealth+ "\nName: "+ scripthub.GetComponent<stats>().playername;
+            playername.text = "Health:"+ scripthub.GetComponent<Player>().health+" / "+ scripthub.GetComponent<Player>().maxhealth+ "\nName: "+ scripthub.GetComponent<Player>().playername;
             playerrealm.text = "Realm: " + scripthub.GetComponent<Cultivation>().Realmname;
             playersubrealm.text = "Subreal: " + scripthub.GetComponent<Cultivation>().Subrealmname;
-            playerqigeneration.text = "Passive Qi Generation: " + scripthub.GetComponent<stats>().passiveqi.ToString() + "per tick";
-            statstxt.text = "physical attack: "+ scripthub.GetComponent<stats>().physicalattack.ToString() + "\nPhysical defence: "+ scripthub.GetComponent<stats>().physicaldefence.ToString() + "\nmental attack: " + scripthub.GetComponent<stats>().mentalattack.ToString() + "\nmental defence: " + scripthub.GetComponent<stats>().mentaldefence.ToString() + "\n";
+            playerqigeneration.text = "Passive Qi Generation: " + scripthub.GetComponent<Player>().passiveqi.ToString() + "per tick";
+            statstxt.text = "physical attack: "+ scripthub.GetComponent<Player>().physicalattack.ToString() + "\nPhysical defence: "+ scripthub.GetComponent<Player>().physicaldefence.ToString() + "\nmental attack: " + scripthub.GetComponent<Player>().mentalattack.ToString() + "\nmental defence: " + scripthub.GetComponent<Player>().mentaldefence.ToString() + "\n";
         }
     }
     public void addventurecanvasfuction()
@@ -340,23 +442,48 @@ public class UImanager : MonoBehaviour
         adventurebool = !adventurebool;
         enclosurecanvasobj.SetActive(!adventurebool);
         adventurecanvas.SetActive(adventurebool);
-        maincanvasobj.SetActive(!adventurebool);
+        maincanvasobj.SetActive(false);
         maincam.SetActive(true);
         adventurecam.SetActive(false);
         adventuringcanvas.SetActive(false);
 
     }
-    public void addventurestart()
+    public void addventurestart(int b)
     {
         //TODO
         //adventurebool = !adventurebool;
+        adventuremodeobj.GetComponent<adventuremode>().activated = true;
+
         adventureactivate.SetActive(true);
         maincam.SetActive(false);
         adventurecam.SetActive(true);
         enclosurecanvasobj.SetActive(!adventurebool);
          adventurecanvas.SetActive(false);
         adventuringcanvas.SetActive(true);
-      // maincanvasobj.SetActive(!adventurebool);
+        maincanvasobj.SetActive(false);
+
+        Debug.Log("adventure number:  " + b);
+        adventuremodeobj.GetComponent<adventuremode>().gotowards(b);
+        // maincanvasobj.SetActive(!adventurebool);
+
+    }
+    public void addventurestop()
+    {
+        //TODO
+        //adventurebool = !adventurebool;
+        adventureactivate.SetActive(false);
+        maincam.SetActive(true);
+        adventurecam.SetActive(false);
+        enclosurecanvasobj.SetActive(true);
+        adventurecanvas.SetActive(false);
+        adventuringcanvas.SetActive(false);
+        maincanvasobj.SetActive(true);
+        adventurebool = false;
+        adventuremodeobj.GetComponent<adventuremode>().setdestination = false;
+        adventuremodeobj.GetComponent<adventuremode>().sellectedadventure = 0;
+        adventuremodeobj.GetComponent<adventuremode>().activated = false;
+       Debug.Log("stooop adventuring");
+        // maincanvasobj.SetActive(!adventurebool);
 
     }
     public void Playerinv()
@@ -371,13 +498,15 @@ public class UImanager : MonoBehaviour
     }
     public void cultivationbutton()
     {
+        Debug.Log("cultivate");
+        if (cultivatable == true)
+        {
+            Debug.Log("cultivating");
 
-        scripthub.GetComponent<Cultivation>().Cultivate = !scripthub.GetComponent<Cultivation>().Cultivate;
-        cross.gameObject.SetActive(scripthub.GetComponent<Cultivation>().Cultivate);
-
+            scripthub.GetComponent<Cultivation>().Cultivate = !scripthub.GetComponent<Cultivation>().Cultivate;
+            cross.gameObject.SetActive(scripthub.GetComponent<Cultivation>().Cultivate);
+        }
     }
-
-  
     public void realminfo()
     {
         realminfoimage.SetActive(true);
@@ -467,7 +596,6 @@ public class UImanager : MonoBehaviour
         }
 
     }
-
     public void rightUI()
     {
         Animator right = GameObject.Find("buttonbackgroundR").GetComponent<Animator>();
@@ -493,7 +621,6 @@ public class UImanager : MonoBehaviour
             left.SetBool("start", true);
         }
     }
-
     public void skillsmortaljourney()
     {
         mortalsjourneyskillsmenu.SetActive(true);

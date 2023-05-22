@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine;
 
 public class adventuring : MonoBehaviour
 {
     // Start is called before the first frame update
+ 
+    
     public GameObject[] pathsprefabs;
     public GameObject spawnlocation;
     public GameObject path;
@@ -15,13 +18,16 @@ public class adventuring : MonoBehaviour
     public GameObject exclamationnmark;
     public bool active;
     public float speed;
+
+    public GameObject choicemenu;
+    public float timetillarival;
     void Start()
     {
         active = true;
         nextpath = false;
         path = GameObject.Find("pathall");
         spawnlocation = GameObject.Find("pathspawn");
-        speed = 0.005f;
+        speed = 0.05f;
         generate();
     }
 

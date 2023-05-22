@@ -24,7 +24,7 @@ public class Qisensingtrigger : MonoBehaviour
         }
         else
         {
-            minigamehubQistage.GetComponent<QiSensingStage>().found = true;
+            minigamehubQistage.GetComponent<QiSensingStage>().found = false;
 
         }
     }
