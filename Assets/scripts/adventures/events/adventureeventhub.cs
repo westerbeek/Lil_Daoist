@@ -32,17 +32,19 @@ public class adventureeventhub : MonoBehaviour
         buttonbool = new bool[21];
         buttonsobjs = new GameObject[21];
         once = false;
+        UIhub = GameObject.Find("UIhub").GetComponent<UImanager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        eventactivated = UIhub.choicesenable;
         if(rewardhub == null)
         {
             rewardhub = GameObject.Find("UIhub").GetComponent<rewards>();
         }
-        if(inv == null)
+        eventactivated = UIhub.choicesenable;
+
+        if (inv == null)
         {
             inv = GameObject.Find("UIhub").GetComponent<Inventory>();
         }

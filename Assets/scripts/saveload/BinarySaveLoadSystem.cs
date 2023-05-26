@@ -23,6 +23,7 @@ public static class BinarySaveLoadSystem
         fileStream.Close();
         return data;
     }
+
     public static void DestroySave(string filePath)
     {
         if (File.Exists(filePath))

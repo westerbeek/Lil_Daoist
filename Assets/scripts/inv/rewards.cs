@@ -135,6 +135,8 @@ public class rewards : MonoBehaviour
         item1.stackable = item2.stackable;
         item1.rarity = item2.rarity;
         item1.description = item2.description;
+        item1.stattext = item2.stattext;
+        item1.Specialfeatures = item2.Specialfeatures;
         item1.type = item2.type;
         item1.subtype1 = item2.subtype1;
         item1.subtype2 = item2.subtype2;

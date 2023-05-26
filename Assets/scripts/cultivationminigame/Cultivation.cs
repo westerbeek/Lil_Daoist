@@ -18,7 +18,7 @@ public class Cultivation : MonoBehaviour
     [SerializeField] private int maxsubrealm;
     public int Maxsubrealm { get { return maxsubrealm; } set { maxsubrealm = value; } }
     [SerializeField] private float xp;
-    public float Xp { get { return xp; } set { xp = value; } }
+    public float Xp { get { return xp; } }
     [SerializeField] private float xpbonus;
     public float Xpbonus { get { return xpbonus; } set { xpbonus = value; } }
     [SerializeField] private float maxxp;
@@ -54,7 +54,7 @@ public class Cultivation : MonoBehaviour
         
        
 
-        if (realm == 0)
+        if (realm == 0)//Todo, change to enums
         {
             mortalstrainingfunction();
         }
@@ -210,13 +210,15 @@ public class Cultivation : MonoBehaviour
     }
    
  
-    public void Giftxp(float gift)//granting xp
+    public void Giftxp(float gift, bool reward)//granting xp
     {
         GameObject ui = GameObject.Find("UIhub");
 
         xp += gift;
-        ui.GetComponent<UImanager>().bgreward();            
-       
+        if (reward == true)
+        {
+            ui.GetComponent<UImanager>().bgreward();
+        }
     }
     public void Giftinspiration(float gift)
     {

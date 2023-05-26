@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class MindpreperationStage : MonoBehaviour
 {
-    public GameObject scripthub;
-    public int answer;
-    public Image showimage;
-    public Image[] colorsimg;
+    [SerializeField] private GameObject Scripthub;
+    public GameObject scripthub { get => Scripthub; set => Scripthub = value; }
 
-    public float xpamountgivenMindprep;
+    [SerializeField] private int Answer;
+    public int answer { get => Answer; set => Answer = value; }
+
+    [SerializeField] private Image Showimage;
+    public Image showimage { get => Showimage; set => Showimage = value; }
+
+    [SerializeField] private Image[] Colorsimg;
+    public Image[] colorsimg { get => Colorsimg; set => Colorsimg = value; }
+
+    [SerializeField] private float XpamountgivenMindprep;
+    public float xpamountgivenMindprep { get => XpamountgivenMindprep; set => XpamountgivenMindprep = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +49,7 @@ public class MindpreperationStage : MonoBehaviour
     }
     public void Complete()
     {
-        scripthub.GetComponent<Cultivation>().Giftxp(xpamountgivenMindprep);
+        scripthub.GetComponent<Cultivation>().Giftxp(xpamountgivenMindprep,true);
         scripthub.GetComponent<Cultivation>().Giftinspiration(xpamountgivenMindprep);
         //absorbed.SetActive(false);
         resetminigame();

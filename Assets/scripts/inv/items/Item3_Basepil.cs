@@ -7,6 +7,7 @@ public class Item3_Basepil : Item
     // Start is called before the first frame update
     public void Start()
     {
+        Starting();
 
     }
     public override void Equip()

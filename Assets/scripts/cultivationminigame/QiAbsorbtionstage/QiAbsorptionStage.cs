@@ -5,36 +5,50 @@ using UnityEngine.UI;
 
 public class QiAbsorptionStage : MonoBehaviour
 {
-    public GameObject scripthub;
+    [SerializeField] private GameObject Scripthub;
+    public GameObject scripthub { get => Scripthub; set => Scripthub = value; }
 
-    public GameObject[] rhunlocs;
-    public GameObject[] rhuns;
-    public Sprite[] rhunssprites;
-    public GameObject absorbed;
-    public GameObject required;
+    [SerializeField] private GameObject[] Rhunlocs;
+    public GameObject[] rhunlocs { get => Rhunlocs; set => Rhunlocs = value; }
 
-    public GameObject RhunRequest;
-    public int xpgivenQiAbsorption;
+    [SerializeField] private GameObject[] Rhuns;
+    public GameObject[] rhuns { get => Rhuns; set => Rhuns = value; }
 
-    public List<int> nodouble = new List<int>();
-    
-    
+    [SerializeField] private Sprite[] Rhunssprites;
+    public Sprite[] rhunssprites { get => Rhunssprites; set => Rhunssprites = value; }
+
+    [SerializeField] private GameObject Absorbed;
+    public GameObject absorbed { get => Absorbed; set => Absorbed = value; }
+
+    [SerializeField] private GameObject Required;
+    public GameObject required { get => Required; set => Required = value; }
+
+    [SerializeField] private GameObject RhunRequest;
+    public GameObject rhunRequest { get => RhunRequest; set => RhunRequest = value; }
+
+    [SerializeField] private int XpgivenQiAbsorption;
+    public int xpgivenQiAbsorption { get => XpgivenQiAbsorption; set => XpgivenQiAbsorption = value; }
+
+    [SerializeField] private List<int> Nodouble = new List<int>();
+    public List<int> nodouble { get => Nodouble; set => Nodouble = value; }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        rhuns = GameObject.FindGameObjectsWithTag("QiAbsorbminigameCollider");
-        rhunlocs = new GameObject[4];
-        rhunlocs[0] = GameObject.Find("rhunloc (1)");
-        rhunlocs[1] = GameObject.Find("rhunloc (2)");
-        rhunlocs[2] = GameObject.Find("rhunloc (3)");
-        rhunlocs[3] = GameObject.Find("rhunloc (4)");
-        scripthub = GameObject.Find("ScriptHub");
+        Rhuns = GameObject.FindGameObjectsWithTag("QiAbsorbminigameCollider");
+        Rhunlocs = new GameObject[4];
+        Rhunlocs[0] = GameObject.Find("rhunloc (1)");
+        Rhunlocs[1] = GameObject.Find("rhunloc (2)");
+        Rhunlocs[2] = GameObject.Find("rhunloc (3)");
+        Rhunlocs[3] = GameObject.Find("rhunloc (4)");
+        Scripthub = GameObject.Find("ScriptHub");
 
-        nodouble.Add(999);
-        nodouble.Add(999);
-        nodouble.Add(999);
-        nodouble.Add(999);
-        xpgivenQiAbsorption = 50;
+        Nodouble.Add(999);
+        Nodouble.Add(999);
+        Nodouble.Add(999);
+        Nodouble.Add(999);
+        XpgivenQiAbsorption = 50;
         resetminigame();
     }
 
@@ -64,7 +78,7 @@ public class QiAbsorptionStage : MonoBehaviour
     }
     public void Complete()
     {
-        scripthub.GetComponent<Cultivation>().Giftxp(xpgivenQiAbsorption);
+        scripthub.GetComponent<Cultivation>().Giftxp(xpgivenQiAbsorption,true);
         scripthub.GetComponent<Cultivation>().Giftinspiration(xpgivenQiAbsorption);
 
         //absorbed.SetActive(false);
@@ -79,7 +93,7 @@ public class QiAbsorptionStage : MonoBehaviour
 //        Debug.Log(nodouble.Count);
 
         absorbed = null;
-        required = rhuns[Random.RandomRange(0, rhuns.Length)];
+        required = Rhuns[Random.RandomRange(0, Rhuns.Length)];
 
         for(int i = 0; i < nodouble.Count;i++)
         {

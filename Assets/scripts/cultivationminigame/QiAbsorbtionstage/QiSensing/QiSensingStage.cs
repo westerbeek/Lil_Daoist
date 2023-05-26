@@ -5,18 +5,36 @@ using UnityEngine.UI;
 
 public class QiSensingStage : MonoBehaviour
 {
-    public GameObject mask;
-    public GameObject scripthub;
-    public GameObject qi2sense;
-    public Image fill;
-    public float fillamount;
-    public float maxfillamount;
-    public float fillspeed;
-    public bool found;
+    [SerializeField] private GameObject Mask;
+    public GameObject mask { get => Mask; set => Mask = value; }
 
-    public Sprite[] rhuns;
+    [SerializeField] private GameObject Scripthub;
+    public GameObject scripthub { get => Scripthub; set => Scripthub = value; }
 
-    public float xpgivenQisensing;
+    [SerializeField] private GameObject Qi2sense;
+    public GameObject qi2sense { get => Qi2sense; set => Qi2sense = value; }
+
+    [SerializeField] private Image Fill;
+    public Image fill { get => Fill; set => Fill = value; }
+
+    [SerializeField] private float Fillamount;
+    public float fillamount { get => Fillamount; set => Fillamount = value; }
+
+    [SerializeField] private float Maxfillamount;
+    public float maxfillamount { get => Maxfillamount; set => Maxfillamount = value; }
+
+    [SerializeField] private float Fillspeed;
+    public float fillspeed { get => Fillspeed; set => Fillspeed = value; }
+
+    [SerializeField] private bool Found;
+    public bool found { get => Found; set => Found = value; }
+
+    [SerializeField] private Sprite[] Rhuns;
+    public Sprite[] rhuns { get => Rhuns; set => Rhuns = value; }
+
+    [SerializeField] private float XpgivenQisensing;
+    public float xpgivenQisensing { get => XpgivenQisensing; set => XpgivenQisensing = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +77,7 @@ public class QiSensingStage : MonoBehaviour
     }
     public void Complete()
     {
-        scripthub.GetComponent<Cultivation>().Giftxp(xpgivenQisensing);
+        scripthub.GetComponent<Cultivation>().Giftxp(xpgivenQisensing,true);
         scripthub.GetComponent<Cultivation>().Giftinspiration(xpgivenQisensing);
 
         //absorbed.SetActive(false);
@@ -71,7 +89,7 @@ public class QiSensingStage : MonoBehaviour
         //Debug.Log(GameObject.Find("Qi_sensing").transform.position) ;
         qi2sense.GetComponent<UILock>().position = GameObject.Find("Qi_sensing").transform.position -newpos;
 
-        qi2sense.GetComponent<Image>().sprite = rhuns[Random.RandomRange(0, rhuns.Length)];
+        qi2sense.GetComponent<Image>().sprite = rhuns[Random.RandomRange(0, Rhuns.Length)];
         fillamount = 0;
     }
 }

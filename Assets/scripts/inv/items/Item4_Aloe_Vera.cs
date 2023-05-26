@@ -10,6 +10,7 @@ public class Item4_Aloe_Vera : Item
     // Update is called once per frame
     public void Start()
     {
+        Starting();
 
     }
     public override void Equip()

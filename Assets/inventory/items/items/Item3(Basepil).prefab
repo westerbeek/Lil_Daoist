@@ -48,7 +48,7 @@ MonoBehaviour:
   name: Base pill
   Quality: 0
   rarity: 3
-  stackable: 0
+  stackable: 1
   amount: 0
   maxamount: 30
   description: A pill made using alchemy

@@ -52,8 +52,11 @@ public class Inventory : MonoBehaviour
     public Image[] equipmentslotimages;
     public GameObject[] equipslots;
 
+    public GameObject Iteminfo;
+
     private void Start()
     {
+        Iteminfo.SetActive(false);
         items = new Item[amountinvslots];
         equipment = new Item[17];
         for (int i = 0; i < amountinvslots; i++)
@@ -142,9 +145,66 @@ public class Inventory : MonoBehaviour
     {
         //TODO
     }
+    public void offiteminfo()
+    {
+
+        Iteminfo.SetActive(false);
+        Debug.Log("close item info");
+
+
+    }
+    public void Iteminspect(int loc)
+    {
+        
+        Iteminfo.SetActive(true);
+        Item tmp = new Item();
+        if (loc < 99)
+        {
+            if (items[loc].id != 0)
+            {
+                tmp = items[loc];
+            }
+        }
+        else
+        {
+            if (equipment[loc - 100].id != 0)
+            {
+                tmp = equipment[loc - 100];
+
+            }
+        }
+
+        GameObject.Find("ItemIcon").GetComponent<Image>().sprite = tmp.icon;
+        GameObject.Find("Itemnametxt").GetComponent<TMP_Text>().text = tmp.name;
+        GameObject.Find("Qualitytxt").GetComponent<TMP_Text>().text = tmp.Quality.ToString();
+        GameObject.Find("Raritytxt").GetComponent<TMP_Text>().text = tmp.rarity.ToString();
+        if (tmp.maxamount < 9999)
+        {
+            GameObject.Find("Amounttxt").GetComponent<TMP_Text>().text = tmp.amount.ToString() + " / " + tmp.maxamount.ToString();
+        }
+        else
+        {
+            GameObject.Find("Amounttxt").GetComponent<TMP_Text>().text = tmp.amount.ToString();
+
+        }
+        GameObject.Find("Type1txt").GetComponent<TMP_Text>().text = tmp.type.ToString();
+        GameObject.Find("Type2txt").GetComponent<TMP_Text>().text = tmp.subtype1.ToString();
+        GameObject.Find("Type3txt").GetComponent<TMP_Text>().text = tmp.subtype2.ToString();
+        GameObject.Find("Type4txt").GetComponent<TMP_Text>().text = tmp.subtype3.ToString();
+        GameObject.Find("DescriptionTxt").GetComponent<TMP_Text>().text = tmp.description+"\n\n";
+        tmp.Starting();
+        GameObject.Find("StatitemTxt").GetComponent<TMP_Text>().text = tmp.stattext+"\n";
+        GameObject.Find("SpecialsTxt").GetComponent<TMP_Text>().text = tmp.Specialfeatures;
+
+
+
+
+        Debug.Log("show item info" + loc);
+
+    }
     private void Update()
     {
-    if (Input.GetMouseButtonUp(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if (Input.GetMouseButtonUp(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             buttondown = false;
         }
@@ -159,6 +219,7 @@ public class Inventory : MonoBehaviour
                 spawndrag(loc1);
                 drag = true;
             }
+          
            
         }
         else
@@ -262,14 +323,29 @@ public class Inventory : MonoBehaviour
             Destroy(ingamedrag);
             dragtimer = 0.5f;
             loc1 = -1;
-        
-          
-           
+            drag = false;
+
+
+
         }
         else
         {
             //openinspect
-            Debug.Log("open inspect item window");
+            if (loc < 99)
+            {
+                if (items[loc].id != 0)
+                {
+                    Iteminspect(loc);
+                }
+            }
+            else
+            {
+                if (equipment[loc - 100].id != 0)
+                {
+                    Iteminspect(loc);
+                }
+            }
+
         }
 
     }
@@ -412,6 +488,8 @@ public class Inventory : MonoBehaviour
         item1.stackable = item2.stackable;
         item1.rarity = item2.rarity;
         item1.description = item2.description;
+        item1.stattext = item2.stattext;
+        item1.Specialfeatures = item2.Specialfeatures;
         item1.type = item2.type;
         item1.subtype1 = item2.subtype1;
         item1.subtype2 = item2.subtype2;

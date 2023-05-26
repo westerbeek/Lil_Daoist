@@ -4,12 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BodypreperationStage : MonoBehaviour
 {
-    public GameObject scripthub;
-    public Image filledprogression;
-    public float progression;
-    public int progressionmaximum;
-    public int xpgivenBodypreperation;
-    
+    [SerializeField] private GameObject Scripthub;
+    public GameObject scripthub { get => Scripthub; set => Scripthub = value; }
+
+    [SerializeField] private Image Filledprogression;
+    public Image filledprogression { get => Filledprogression; set => Filledprogression = value; }
+
+    [SerializeField] private float Progression;
+    public float progression { get => Progression; set => Progression = value; }
+
+    [SerializeField] private int Progressionmaximum;
+    public int progressionmaximum { get => Progressionmaximum; set => Progressionmaximum = value; }
+
+    [SerializeField] private int XpgivenBodypreperation;
+    public int xpgivenBodypreperation { get => XpgivenBodypreperation; set => XpgivenBodypreperation = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +56,7 @@ public class BodypreperationStage : MonoBehaviour
     }
     public void Complete()
     {
-        scripthub.GetComponent<Cultivation>().Giftxp(xpgivenBodypreperation);
+        scripthub.GetComponent<Cultivation>().Giftxp(xpgivenBodypreperation,true);
         scripthub.GetComponent<Cultivation>().Giftinspiration(xpgivenBodypreperation);
 
         //absorbed.SetActive(false);

@@ -13,7 +13,7 @@ public class SaveLoadManager : MonoBehaviour
     
     public int cultivation = 5;
     public string lore = "i am being saved";
-    public float funny = 4.20f;
+    public float tmpfloat = 4.20f;
 
     public bool once;
 
@@ -74,7 +74,7 @@ public class SaveLoadManager : MonoBehaviour
         data.Add("seenintro", scripthub.GetComponent<Player>().seenintro);
         data.Add("cultivation", cultivation);
         data.Add("lore", lore);
-        data.Add("funny", funny);
+        data.Add("funny",tmpfloat);
 
         BinarySaveLoadSystem.Save(filePath, data);
     }
@@ -94,7 +94,7 @@ public class SaveLoadManager : MonoBehaviour
             }
             cultivation = (int)data["cultivation"];
             lore = (string)data["lore"];
-            funny = (float)data["funny"];
+           tmpfloat = (float)data["funny"];
         }
     }
     public void destroysave()

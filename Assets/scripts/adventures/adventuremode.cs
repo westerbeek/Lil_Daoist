@@ -10,77 +10,143 @@ using UnityEngine.EventSystems;
 
 public class adventuremode : MonoBehaviour
 {
-    public bool activated;
-    public Image Map;
-    public GameObject scripthub;
-    public Player player;
-    public stats stat;
+    [SerializeField] private bool Activated;
+    public bool activated { get => Activated; set => Activated = value; }
+
+    [SerializeField] private Image Map;
+    public Image map { get => Map; set => Map = value; }
+
+    [SerializeField] private GameObject Scripthub;
+    public GameObject scripthub { get => Scripthub; set => Scripthub = value; }
+
+    [SerializeField] private Player Player;
+    public Player player { get => Player; set => Player = value; }
+
+    [SerializeField] private stats Stat;
+    public stats stat { get => Stat; set => Stat = value; }
+
     /*
-    public Vector2 playercoords;
-    public Vector2 headed;*/
-    public Vector2 mouse;
-    public List<Vector2> eventlocations;
-    public List<string> eventtypes;//todo
-    public List<bool> known;
-    public List<bool> rumorconfirmed;//todo
-    public List<bool> completedevent;//todo
-    public List<GameObject> placesofinterests;
+    [SerializeField] private Vector2 Playercoords;
+    public Vector2 playercoords { get => Playercoords; set => Playercoords = value; }
 
-    public GameObject[] icons;
-    public GameObject playerlocicon;
-    public GameObject ingameplayerlocicon;
-    public Vector3 playerscale;
-    public bool moving;
-    public TMP_Text mousecoorstxt;
-    public TMP_Text playercoordstxt;
-    public int sellectedadventure;
+    [SerializeField] private Vector2 Headed;
+    public Vector2 headed { get => Headed; set => Headed = value; }
+    */
+
+    private Vector2 mouse;
+
+    [SerializeField] private List<Vector2> Eventlocations;
+    public List<Vector2> eventlocations { get => Eventlocations; set => Eventlocations = value; }
+
+    [SerializeField] private List<string> Eventtypes;
+    public List<string> eventtypes { get => Eventtypes; set => Eventtypes = value; }
+
+    [SerializeField] private List<bool> Known;
+    public List<bool> known { get => Known; set => Known = value; }
+
+    [SerializeField] private List<bool> Rumorconfirmed;
+    public List<bool> rumorconfirmed { get => Rumorconfirmed; set => Rumorconfirmed = value; }
+
+    [SerializeField] private List<bool> Completedevent;
+    public List<bool> completedevent { get => Completedevent; set => Completedevent = value; }
+
+    [SerializeField] private List<GameObject> Placesofinterests;
+    public List<GameObject> placesofinterests { get => Placesofinterests; set => Placesofinterests = value; }
+
+    [SerializeField] private GameObject[] Icons;
+    public GameObject[] icons { get => Icons; set => Icons = value; }
+
+    [SerializeField] private GameObject Playerlocicon;
+    public GameObject playerlocicon { get => Playerlocicon; set => Playerlocicon = value; }
+
+    [SerializeField] private GameObject Ingameplayerlocicon;
+    public GameObject ingameplayerlocicon { get => Ingameplayerlocicon; set => Ingameplayerlocicon = value; }
+
+    [SerializeField] private Vector3 Playerscale;
+    public Vector3 playerscale { get => Playerscale; set => Playerscale = value; }
+
+    [SerializeField] private bool Moving;
+    public bool moving { get => Moving; set => Moving = value; }
+
+    [SerializeField] private TMP_Text Mousecoorstxt;
+    public TMP_Text mousecoorstxt { get => Mousecoorstxt; set => Mousecoorstxt = value; }
+
+    [SerializeField] private TMP_Text Playercoordstxt;
+    public TMP_Text playercoordstxt { get => Playercoordstxt; set => Playercoordstxt = value; }
+
+    [SerializeField] private int Sellectedadventure;
+    public int sellectedadventure { get => Sellectedadventure; set => Sellectedadventure = value; }
+
     //zoom
-    [SerializeField] float startSize = 1;
-    [SerializeField] float minSize = .5f;
-    [SerializeField] float maxSize = 10;
-    public float zoomscale;
+    [SerializeField] private float StartSize = 1;
+    public float startSize { get => StartSize; set => StartSize = value; }
 
-    public float timetillarival;
-    private bool startadventuring;
-    private bool reachedbool;
-    public bool setdestination;
-    public bool adventuring;
+    [SerializeField] private float MinSize = .5f;
+    public float minSize { get => MinSize; set => MinSize = value; }
 
-    public TMP_Text timetilltxt;
+    [SerializeField] private float MaxSize = 10;
+    public float maxSize { get => MaxSize; set => MaxSize = value; }
+
+    [SerializeField] private float Zoomscale;
+    public float zoomscale { get => Zoomscale; set => Zoomscale = value; }
+
+    [SerializeField] private float Timetillarival;
+    public float timetillarival { get => Timetillarival; set => Timetillarival = value; }
+
+    [SerializeField] private bool Startadventuring;
+    private bool startadventuring { get => Startadventuring; set => Startadventuring = value; }
+
+    [SerializeField] private bool Reachedbool;
+    private bool reachedbool { get => Reachedbool; set => Reachedbool = value; }
+
+    [SerializeField] private bool Setdestination;
+    public bool setdestination { get => Setdestination; set => Setdestination = value; }
+
+    [SerializeField] private bool Adventuring;
+    public bool adventuring { get => Adventuring; set => Adventuring = value; }
+
+    [SerializeField] private TMP_Text Timetilltxt;
+    public TMP_Text timetilltxt { get => Timetilltxt; set => Timetilltxt = value; }
+
     // Start is called before the first frame update
     void Awake()
     {
-        reachedbool = false;
-        scripthub = GameObject.Find("ScriptHub");
-        player = scripthub.GetComponent<Player>();
-        stat = scripthub.GetComponent<Player>();
-        mousecoorstxt = GameObject.Find("Adventuremousecoordstxt").GetComponent<TMP_Text>();
+        //tmp
+        Activated = true;
+        //tmp
+
+        zoomscale = .5f;
+        Reachedbool = false;
+        Scripthub = GameObject.Find("ScriptHub");
+        Player = scripthub.GetComponent<Player>();
+        Stat = scripthub.GetComponent<Player>();
+        Mousecoorstxt = GameObject.Find("Adventuremousecoordstxt").GetComponent<TMP_Text>();
         Map = GameObject.Find("AdventureMap").GetComponent<Image>();
-        timetilltxt = GameObject.Find("timetilladventure").GetComponent<TMP_Text>();
-        GenerateEvents(150);
-        if(player.olddatafound == false)
+        Timetilltxt = GameObject.Find("timetilladventure").GetComponent<TMP_Text>();
+        GenerateEvents(250);
+        if(Player.olddatafound == false)
         {
-            player.currentplayercoords = new Vector2(Random.RandomRange(-200, 200), Random.RandomRange(-200, 200));
-            if(ingameplayerlocicon == null)
+            Player.currentplayercoords = new Vector2(Random.RandomRange(-200, 200), Random.RandomRange(-200, 200));
+            if(Ingameplayerlocicon == null)
             {
 
-                ingameplayerlocicon = Instantiate(playerlocicon);
-                ingameplayerlocicon.transform.parent = Map.transform;
-                playerscale = ingameplayerlocicon.transform.lossyScale;
-                ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
-                ingameplayerlocicon.transform.localScale = new Vector3(4, 4, 1);
+                Ingameplayerlocicon = Instantiate(Playerlocicon);
+                Ingameplayerlocicon.transform.SetParent(Map.transform);
+                Playerscale = ingameplayerlocicon.transform.lossyScale;
+                Ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
+                Ingameplayerlocicon.transform.localScale = new Vector3(4, 4, 1);
 
             }
-            for (int i = 0; i < eventlocations.Count; i++)
+            for (int i = 0; i < Eventlocations.Count; i++)
             {
-                float distance = Vector2.Distance(player.currentplayercoords, eventlocations[i]);
+                float distance = Vector2.Distance(Player.currentplayercoords, Eventlocations[i]);
                 if(distance <= 150)
                 {
-                    known[i] = true;
+                    Known[i] = true;
                 }
                 else
                 {
-                    known[i] = false;
+                    Known[i] = false;
                 }
             }
         }
@@ -92,7 +158,7 @@ public class adventuremode : MonoBehaviour
         {
             eventtypes.Add("encounter");
             eventlocations.Add(new Vector2(Random.Range(-800, 800), Random.Range(-1100, 1100)));
-            GameObject Eventobj = Instantiate(icons[Random.Range(0, icons.Length)]);
+            GameObject Eventobj = Instantiate(Icons[Random.Range(0, Icons.Length)]);
             Eventobj.transform.SetParent(Map.transform);
             eventtypes[i] = "Basic";
             known.Add(false);
@@ -113,36 +179,36 @@ public class adventuremode : MonoBehaviour
 
     private void SetZoommap(float targetSize)
     {
-        ingameplayerlocicon.transform.parent = null;
+        Ingameplayerlocicon.transform.parent = null;
         Map.rectTransform.localScale = new Vector3(targetSize, targetSize, 1);
-        ingameplayerlocicon.transform.parent = Map.transform;
-        ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
-
+        Ingameplayerlocicon.transform.parent = Map.transform;
+       Ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
+        Debug.Log("");
     }
     void checkdiscovered()
     {
-        for (int i = 0; i < eventlocations.Count; i++)
+        for (int i = 0; i < Eventlocations.Count; i++)
         {
-            if (placesofinterests[i] != null)
+            if (Placesofinterests[i] != null)
             {
-                placesofinterests[i].SetActive(known[i]);
+                Placesofinterests[i].SetActive(Known[i]);
             }
             else
             {
-                placesofinterests.Remove(placesofinterests[i]);
+                Placesofinterests.Remove(Placesofinterests[i]);
             }
         }
     }
     public void gotowards(int c)
     {
-        sellectedadventure = c;
-        player.heading2 = eventlocations[c];
-        setdestination = true;
+        Sellectedadventure = c;
+        player.heading2 = Eventlocations[c];
+        Setdestination = true;
     }
     // Update is called once per frame
     void Update()
     {
-        if (activated == true)
+        if (Activated == true)
         {
             checkdiscovered();
 
@@ -169,7 +235,7 @@ public class adventuremode : MonoBehaviour
                 mouse.y *= 10;
                 Mathf.FloorToInt(mouse.x);
                 Mathf.FloorToInt(mouse.y);
-                mousecoorstxt.text = "x: " + Mathf.FloorToInt(mouse.x) + "  y: " + Mathf.FloorToInt(mouse.y); 
+                Mousecoorstxt.text = "x: " + Mathf.FloorToInt(mouse.x) + "  y: " + Mathf.FloorToInt(mouse.y); 
 
                 //Vector2 posInImage = oldmouse - new Vector2(Map.transform.position.x, Map.transform.position.y);
                 //RectTransformUtility.ScreenPointToLocalPointInRectangle(Map.rectTransform, mouse, null,  out Vector2 uiPosition);
@@ -178,12 +244,12 @@ public class adventuremode : MonoBehaviour
             }
         }
 
-        if (GameObject.Find("UIhub").GetComponent<UImanager>().adventurebool == true && setdestination == true)
+        if (GameObject.Find("UIhub").GetComponent<UImanager>().adventurebool == true && Setdestination == true)
         {
-            if (startadventuring == false)
+            if (Startadventuring == false)
             {
                 player.oldplayercoords = player.currentplayercoords;
-                startadventuring = true;
+                Startadventuring = true;
             }
             else
             {
@@ -196,21 +262,21 @@ public class adventuremode : MonoBehaviour
 
                     Vector2 newPosition = Vector2.MoveTowards(player.currentplayercoords, player.heading2, speed * Time.deltaTime);
                     player.currentplayercoords = newPosition;
-                    ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
+                    Ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
 
-                    timetillarival = timeToDestination - Time.deltaTime;
+                    Timetillarival = timeToDestination - Time.deltaTime;
                     int remainingSeconds = Mathf.FloorToInt(timetillarival);
                     int minutes = remainingSeconds / 60;
                     int seconds = remainingSeconds % 60;
                     int hours = minutes / 60;
                     minutes %= 60;
-                    timetilltxt.text = ""+hours+" H "+minutes+" M "+seconds+" S";
+                    Timetilltxt.text = ""+hours+" H "+minutes+" M "+seconds+" S";
                 }
 
                 if (player.currentplayercoords == player.heading2)
                 {
-                    startadventuring = false;
-                    reachedbool = true;
+                    Startadventuring = false;
+                    Reachedbool = true;
                     reachdestination();
                 }
             }
@@ -219,7 +285,7 @@ public class adventuremode : MonoBehaviour
     public void reachdestination()
     {
         Debug.Log("finished adventure");
-        if(eventtypes[sellectedadventure] == "Basic")
+        if(Eventtypes[Sellectedadventure] == "Basic")
         {
             GameObject.Find("UIhub").GetComponent<bubblenotification>().notificationtype = "adventurecomplete";
            
@@ -230,13 +296,13 @@ public class adventuremode : MonoBehaviour
     public void adventurecomplete()
     {
         GameObject.Find("UIhub").GetComponent<UImanager>().choicesenable = true;
-        GameObject.Find("UIhub").GetComponent<UImanager>().eventtype = eventtypes[sellectedadventure];
+        GameObject.Find("UIhub").GetComponent<UImanager>().eventtype = Eventtypes[Sellectedadventure];
 
-        setdestination = false;
-        reachedbool = false;
-        eventlocations.Remove(player.heading2);
+        Setdestination = false;
+        Reachedbool = false;
+        Eventlocations.Remove(player.heading2);
 
-        Destroy(placesofinterests[sellectedadventure]);
+        Destroy(Placesofinterests[Sellectedadventure]);
 
     }
 

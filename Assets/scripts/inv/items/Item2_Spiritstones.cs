@@ -6,10 +6,16 @@ public class Item2_Spiritstones : Item
 {
     // Start is called before the first frame update
 
+  
 
+
+  
     // Update is called once per frame
     public void Start()
     {
+        Starting();
+
+
 
     }
     public override void Equip()

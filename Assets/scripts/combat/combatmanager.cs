@@ -9,6 +9,7 @@ using TMPro;
 public class combatmanager : MonoBehaviour
 {
     public GameObject scripthub;
+    public rewards reward;
     public bool gotfighters;
     public int turn;
     public int subturn;//0draw phase//1 playface// 2 end phase//3 other turn
@@ -31,7 +32,7 @@ public class combatmanager : MonoBehaviour
     public List<GameObject> playerhandobjs;
     public List<GameObject> enemyhandobjs;
     public List<Deck> decksinplay;
-    public int amountcardsleft;
+    public int[] amountcardsleft;
 
     public Combatcard sellectedcard;
     public GameObject Bigcard;
@@ -45,9 +46,37 @@ public class combatmanager : MonoBehaviour
     public Player playerstats;
     public TMP_Text playername;
     public TMP_Text Enemyname;
+    public bool combatactive;
 
+    private bool startofthegame;
+    public int playeramountcardsplayed;
+    public int playermaxcardsplayable;
+    public int enemyamountcardsplayed;
+    public int enemymaxcardsplayable;
+
+    private bool pickcardonce;
+    private int randomnumber;
+    [SerializeField]private bool next;
+    [SerializeField]private bool showenemycard;
+
+    //objects
+    public GameObject canvas;
+    public GameObject combatarena;
+    public GameObject winlossscreen;
+    public GameObject wintext;
+    public GameObject losetext;
+    private bool addrewards;
     void Start()
     {
+
+        winlossscreen = GameObject.Find("winloss");
+        wintext = GameObject.Find("CWintext");
+        losetext = GameObject.Find("CLosetext");
+        reward = GameObject.Find("UIhub").GetComponent<rewards>();
+        winlossscreen.SetActive(false);
+        enemymaxcardsplayable = 1;
+        playermaxcardsplayable = 99;
+        amountcardsleft = new int[2];
         scripthub = GameObject.Find("ScriptHub");
         if(playerstats == null)
         {
@@ -63,12 +92,12 @@ public class combatmanager : MonoBehaviour
         }
         if(PlayerEnergyfill == null)
         {
-            Playerhealthfill = GameObject.Find("Cenergyplayerfilled").GetComponent<Image>();
+            PlayerEnergyfill = GameObject.Find("Cenergyplayerfilled").GetComponent<Image>();
 
         }
         if (Enemyhealthfill == null)
         {
-            Playerhealthfill = GameObject.Find("Chealthenemyfilled").GetComponent<Image>();
+            Enemyhealthfill = GameObject.Find("Chealthenemyfilled").GetComponent<Image>();
 
         }
         if (playername == null)
@@ -82,58 +111,102 @@ public class combatmanager : MonoBehaviour
         Bigcard = GameObject.Find("LargeCard");
         BigcardCastbutton = GameObject.Find("CombatCastButton");
         Bigcard.SetActive(false);
-        battlestart();
+        playerstats = scripthub.GetComponent<Player>();
+        combatarena = GameObject.Find("combat");
+        canvas = GameObject.Find("Combatcanvas");
+
+        combatarena.SetActive(false);
+        canvas.SetActive(false);
+
+        //GameObject.Find("Combatcanvas").SetActive(false);
     }
     void battlestart()
     {
+        winlossscreen.SetActive(false);
+        addrewards = false;
         //decksinplay = new Deck[amountparticipants];
+        foreach (GameObject obj in playerhandobjs)
+        {
+            Destroy(obj);
+        }
+        foreach (GameObject obj in enemyhandobjs)
+        {
+            Destroy(obj);
+        }
+        // Clear the list
+
+        playerhandobjs.Clear();
+        enemyhandobjs.Clear();
+        playerhand.Clear();
+        enemyhand.Clear();
         decksinplay[0].deckinuse = decksinplay[0].decksaved.ToList();
         decksinplay[1].deckinuse = decksinplay[1].decksaved.ToList();
-        amountcardsleft = decksinplay[0].deckinuse.Count;
+        amountcardsleft[0] = decksinplay[0].deckinuse.Count;
+        amountcardsleft[1] = decksinplay[1].deckinuse.Count;
         turn = 1;
         subturn = 0;
         whoseturn = 0;
+        enemystats.health = enemystats.maxhealth;
 
         shufflecard(decksinplay[0]);
         shufflecard(decksinplay[1]);
         drawcards(0, 5);
         drawcards(1, 5);
         determinfirst();
-        bool start = true;
-        startturn(whoseturn,start);
+        pickcardonce = false;
+        startofthegame = true;
+
     }
     public void Displayplayerhand()
     {
 
         for (int i = 0; i < playerhand.Count; i++)
         {
-            if (playerhandobjs.Count < playerhand.Count)
+            int index = i;
+            GameObject tmpcard = null;
+
+            if (i < playerhandobjs.Count)
             {
-                int index = i;
-                GameObject tmpcard = Instantiate(cardprefab);
-                Destroy(tmpcard.GetComponent<Combatcard>());
-                Component addedComponent = tmpcard.AddComponent(playerhand[i].GetType());
-                var script = addedComponent as Combatcard;
-                if (script != null)
-                {
-                    script.cardimage = playerhand[i].cardimage;
-                    script.name = playerhand[i].name;
-                    script.description = playerhand[i].description;
-                    script.energyCost = playerhand[i].energyCost;
-                    tmpcard.transform.Find("Cardname").GetComponent<TMP_Text>().text = script.name;
-                    tmpcard.transform.Find("Carddescription").GetComponent<TMP_Text>().text = script.description;
-                    tmpcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>().text = "" + script.energyCost;
-                    tmpcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>().sprite = script.cardimage;
-                }
-                else
-                {
-                    Debug.LogError("player hand Failed to cast the added component to the appropriate type.");
-                }
-                tmpcard.transform.SetParent(GameObject.Find("playerhand").transform);
-                tmpcard.transform.localScale = new Vector3(4.41616869f, 4.52701521f, 4.52701521f);
-                tmpcard.GetComponent<Button>().GetComponent<Button>().onClick.AddListener(() => sellecting(index));
+                // Use the existing card object from the playerhandobjs list
+                tmpcard = playerhandobjs[i];
+            }
+            else
+            {
+                // Create a new card object
+                tmpcard = GameObject.Instantiate(cardprefab, GameObject.Find("playerhand").transform);
                 playerhandobjs.Add(tmpcard);
             }
+
+            Destroy(tmpcard.GetComponent<Combatcard>());
+            Component addedComponent = tmpcard.AddComponent(playerhand[i].GetType());
+            var script = addedComponent as Combatcard;
+
+            if (script != null)
+            {
+                // Update the card properties
+                script.cardimage = playerhand[i].cardimage;
+                script.name = playerhand[i].name;
+                script.description = playerhand[i].description;
+                script.energyCost = playerhand[i].energyCost;
+
+                TMP_Text cardNameText = tmpcard.transform.Find("Cardname").GetComponent<TMP_Text>();
+                TMP_Text cardDescriptionText = tmpcard.transform.Find("Carddescription").GetComponent<TMP_Text>();
+                TMP_Text costText = tmpcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>();
+                Image cardImage = tmpcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>();
+
+                cardNameText.text = script.name;
+                cardDescriptionText.text = script.description;
+                costText.text = script.energyCost.ToString();
+                cardImage.sprite = script.cardimage;
+            }
+            else
+            {
+                Debug.LogError("Player hand failed to cast the added component to the appropriate type.");
+            }
+
+            tmpcard.transform.localScale = new Vector3(4.41616869f, 4.52701521f, 4.52701521f);
+            tmpcard.GetComponent<Button>().onClick.RemoveAllListeners();
+            tmpcard.GetComponent<Button>().onClick.AddListener(() => sellecting(index));
         }
     }
     public void Displayenemyhand()
@@ -170,13 +243,14 @@ public class combatmanager : MonoBehaviour
     {
         if(startofgame == true)
         {
-            midturn(whichplayer);
+            startofthegame = false;
             subturn = 1;
+            Debug.Log("startofgame");
+
         }
         else
         {
             drawcards(whichplayer, 1);
-            midturn(whichplayer);
             subturn = 1;
             Debug.Log("startturn");
 
@@ -184,18 +258,69 @@ public class combatmanager : MonoBehaviour
     }
     public void midturn(int whichplayer)
     {
-        if(whichplayer != 0)
+
+        if (whichplayer == 0)
+        {
+            if (next == true)
+            {
+                subturn = 2;
+                next = false;
+            }
+        }
+        else
         {
             Debug.Log("mudturn");
             //ai
             if (pause == false)
             {
-                int randomnumber = Random.Range(0, enemyhand.Count -1);
-                if (enemyhandobjs[randomnumber] != null)
+               
+                if (pickcardonce == false)
                 {
-                    usecard(whichplayer, enemyhand[randomnumber]);//does only do 1 attack for now
-                    endturn(whichplayer);
-                    subturn = 2;
+                    randomnumber = Random.Range(0, enemyhand.Count - 1);
+                    pickcardonce = true;
+                }
+                if (enemymaxcardsplayable > enemyamountcardsplayed && pickcardonce == true)
+                {
+                    if (enemyhandobjs[randomnumber] != null)
+                    {
+                        if (showenemycard == false)
+                        {
+                            sellecting(randomnumber);
+                            Debug.Log("enemy using card no.  "+randomnumber);
+                        }
+                        else
+                        {
+                            if (next == true)
+                            {
+                                usecard(whichplayer, enemyhand[randomnumber]);//does only do 1 attack for now
+                                enemyamountcardsplayed++;
+                                pickcardonce = false;
+                                if(enemymaxcardsplayable == enemyamountcardsplayed)
+                                {
+                                    showenemycard = false;
+
+                                    subturn = 2;
+
+                                }
+                                next = false;
+                            }
+
+                            //
+                        }
+                    }
+                }
+                else
+                {
+                    if (next == true)
+                    {
+                        usecard(whichplayer, enemyhand[randomnumber]);//does only do 1 attack for now
+                        enemyamountcardsplayed++;
+                        showenemycard = false;
+
+                        pickcardonce = false;
+                        subturn = 2;
+                        next = false;
+                    }
                 }
             }
         }
@@ -207,7 +332,14 @@ public class combatmanager : MonoBehaviour
     public void endturn(int whichplayer)
     {
        Debug.Log("endturn");
-
+        if(whichplayer == 0)
+        {
+            playerstats.energy += 20;
+        }
+        else
+        {
+            enemystats.energy += 20;
+        }
         subturn = 0;
         whoseturn++;
         if (whoseturn > amountparticipants-1)
@@ -215,8 +347,14 @@ public class combatmanager : MonoBehaviour
             whoseturn = 0;
             turn++;
         }
-        startturn(whoseturn,false);
+        enemyamountcardsplayed = 0;
+        playeramountcardsplayed = 0;
+        pickcardonce = false;
+                        showenemycard = false;
 
+        next = false;
+        Displayenemyhand();
+        Displayplayerhand();
     }
     public void determinfirst()
     {
@@ -240,6 +378,7 @@ public class combatmanager : MonoBehaviour
         // Determine which hand to modify and which deck to draw from
         List<Combatcard> hand = whichplayer == 0 ? playerhand : enemyhand;
         Deck sellecteddeck = whichplayer == 0 ? decksinplay[0] : decksinplay[1];
+        List<Combatcard> graveyard = whichplayer == 0 ? playergraveyard : enemygraveyard;
 
         // Draw the specified number of cards from the deck and add them to the player's hand
         for (int i = 0; i < amountcards; i++)
@@ -250,13 +389,23 @@ public class combatmanager : MonoBehaviour
                 Combatcard cardDrawn = sellecteddeck.deckinuse[0];
                 hand.Add(cardDrawn);
                 sellecteddeck.deckinuse.RemoveAt(0);
-                amountcardsleft = decksinplay[0].deckinuse.Count;
+                amountcardsleft[whichplayer] = decksinplay[whichplayer].deckinuse.Count;
 
             }
             else
             {
+                sellecteddeck.deckinuse = graveyard.ToList();
+                amountcardsleft[whichplayer] = decksinplay[whichplayer].deckinuse.Count;
+
+
+                graveyard.Clear();
+
+                shufflecard(sellecteddeck);
+                 
+                
                 // If there are no more cards in the deck, print a message to the console
                 Debug.Log("No more cards in deck!");
+
             }
         }
         Displayplayerhand();
@@ -264,19 +413,36 @@ public class combatmanager : MonoBehaviour
     }
     public void usecard(int whichplayer, Combatcard usedcard)
     {
-        usedcard.Use(whichplayer);
-        usedcard.used = true;
-        Bigcard.SetActive(false);
+        if (whichplayer == 0)
+        {
+            if (usedcard.energyCost <= playerstats.energy)
+            {
+                usedcard.Use(whichplayer);
+                usedcard.used = true;
+                add2graveyard(whichplayer, usedcard);
+                Bigcard.SetActive(false);
+                playerstats.energy -= usedcard.energyCost;
+            }
+        }
+        else
+        {
+            usedcard.Use(whichplayer);
+            usedcard.used = true;
+            add2graveyard(whichplayer, usedcard);
+            Bigcard.SetActive(false);
+        }
 
-        add2graveyard(whichplayer,usedcard);
     }
     public void sellecting(int n)
     {
         //tmp
+
+        Displayplayerhand();
+        Displayenemyhand();
         // whoseturn = 0;
         int F = n ;
         Debug.Log(F);
-        if (whoseturn == 0)
+        if (whoseturn == 0)//player
         {
             if (playerhand[F] != null)
             {
@@ -290,22 +456,30 @@ public class combatmanager : MonoBehaviour
                 Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text = playerhand[F].name;
                 BigcardCastbutton.GetComponent<Button>().onClick.RemoveAllListeners();
                 BigcardCastbutton.GetComponent<Button>().onClick.AddListener(() => usecard(whoseturn, playerhand[F]));
+                Bigcard.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
 
             }
         }
 
-        else
+        else//enemy
         {
-            if (Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text != playerhand[F].name)
+            Bigcard.SetActive(true);
+            BigcardCastbutton.SetActive(false);
+
+            if (Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text != enemyhand[F].name)
             {
-                Bigcard.transform.Find("Carddescription").GetComponent<TMP_Text>().text = playerhand[F].description;
-                Bigcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>().text = "" + playerhand[F].energyCost;
-                Bigcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>().sprite = playerhand[F].cardimage;
+                Bigcard.transform.Find("Carddescription").GetComponent<TMP_Text>().text = enemyhand[F].description;
+                Bigcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>().text = "" + enemyhand[F].energyCost;
+                Bigcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>().sprite = enemyhand[F].cardimage;
 
-                Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text = playerhand[F].name;
+                Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text = enemyhand[F].name;
+                Bigcard.GetComponent<Image>().color = new Color32(255,100,100,255);
             }
-
+            showenemycard = true;
         }
+
+        Displayplayerhand();
+        Displayenemyhand();
     }
     public void disgardcard(int whichplayer, Combatcard disgardcard)
     {
@@ -342,13 +516,37 @@ public class combatmanager : MonoBehaviour
 
     void Update()
     {
-        if(whoseturn != 0)
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            if (Bigcard.activeSelf == true)
-            {
-                //TODO show card enemy plays
-            }
+            combatarena.SetActive(true);
+            canvas.SetActive(true);
+
+            playerstats.health = playerstats.maxhealth;
+            enemystats.health = enemystats.maxhealth;
+            battlestart();
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            playerstats.health = 0;
+           
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            enemystats.health = 0;
+        }
+        if (subturn == 0)
+        {
+            startturn(whoseturn, startofthegame);
+        }
+        if (subturn == 1)
+        {
+            midturn(whoseturn);
+        }
+        if (subturn == 2)
+        {
+            endturn(whoseturn);
+        }
+        
         Displayplayerhand();
         Displayenemyhand();
         trackstats();
@@ -367,23 +565,78 @@ public class combatmanager : MonoBehaviour
 
         }
    
-        if(Bigcard.activeSelf == true)
-        {
-            
-        }
     }
     void trackstats()
     {
         
         Playerhealthfill.fillAmount = playerstats.health / playerstats.maxhealth;
-       // Enemyhealthfill.fillAmount = enemystats.health / enemystats.maxhealth;
+        PlayerEnergyfill.fillAmount = playerstats.energy / playerstats.maxenergy;
+        Enemyhealthfill.fillAmount = enemystats.health / enemystats.maxhealth;
         playername.text = playerstats.playername;
+        Enemyname.text = enemystats.playername;
+
+        if(playerstats.health <= 0)
+        {
+            endcombat(false);
+
+        }
+        if (enemystats.health <= 0)
+        {
+            endcombat(true);
 
 
+        }
     }
-    public void endturnbutton()
+    public void Nextbutton()
     {
-        subturn = 2;
-        endturn(whoseturn);
+        next = true;
+        //subturn = 2;
+        //endturn(whoseturn);
+    }
+
+    public void endcombat(bool winloss)
+    {
+        
+        if (winloss == true)
+        {
+            Debug.Log("victory!");
+            winlossscreen.SetActive(true);
+            wintext.SetActive(true);
+            losetext.SetActive(false);
+
+            // reward screen
+            if (addrewards == false)
+            {
+                if (decksinplay[1].finalloot.Count >= 1)
+                {
+                    for (int i = 0; i < decksinplay[1].finalloot.Count; i++)
+                    {
+                        reward.Addrewards(decksinplay[1].finalloot[i].id, decksinplay[1].finalloot[i].name, decksinplay[1].amounts[i], decksinplay[1].finalloot[i].Quality);
+                    }
+                }
+                decksinplay[1].finalloot.Clear();
+
+                reward.showrewards(reward.revealint);
+                addrewards = true;
+            }
+            //close combat
+
+        }
+        else
+        {
+            Debug.Log("Loser!");
+            //lose screen
+            //close combat
+            winlossscreen.SetActive(true);
+            wintext.SetActive(false);
+            losetext.SetActive(true);
+        }
+    }
+    public void endcombatbutton()
+    {
+        winlossscreen.SetActive(false);
+
+        combatarena.SetActive(false);
+        canvas.SetActive(false);
     }
 }

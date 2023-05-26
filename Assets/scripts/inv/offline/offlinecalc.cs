@@ -9,14 +9,14 @@ public class offlinecalc : MonoBehaviour
     public int currentsecond;
     public int currentminute;
     public int currenthour;
-    public int currentdate;
+    public int currentday;
     public int currentmonth;
     public int currentyear;
 
     public int oldsecond;
     public int oldminute;
     public int oldhour;
-    public int olddate;
+    public int oldday;
     public int oldmonth;
     public int oldyear;
 
@@ -30,11 +30,12 @@ public class offlinecalc : MonoBehaviour
         oldsecond = oldTime.Second;
         oldminute = oldTime.Minute;
         oldhour = oldTime.Hour;
-        olddate = oldTime.Day;
+        oldday = oldTime.Day;
         oldmonth = oldTime.Month;
         oldyear = oldTime.Year;
 
-       
+        TimeSpan difference = currentTime - oldTime;//todo 
+
 
 
     }
@@ -46,7 +47,7 @@ public class offlinecalc : MonoBehaviour
         currentsecond = currentTime.Second;
         currentminute = currentTime.Minute;
         currenthour = currentTime.Hour;
-        currentdate = currentTime.Day;
+        currentday = currentTime.Day;
         currentmonth = currentTime.Month;
         currentyear = currentTime.Year;
         if (Input.GetKeyDown(KeyCode.F))

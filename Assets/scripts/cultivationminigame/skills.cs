@@ -5,22 +5,47 @@ using UnityEngine.UI;
 
 public class skills : MonoBehaviour
 {
-    public GameObject[] skillsobj;
-    public GameObject mortalsjourney;
-    public GameObject qimanipulation;
+    [SerializeField] private GameObject[] Skillsobj;
+    public GameObject[] skillsobj { get => Skillsobj; set => Skillsobj = value; }
 
-    public int amountskills;
-    public string[] skillsname;
-    public string[] skillsinfo;
-    //public float[] skills;
-    public int[] skillslvl;
-    public Text[] skillslvltxt;
-    public float[] skillsxp;
-    public float[] skillsmaxxp;
-    public int[] skillspointcost;
+    [SerializeField] private GameObject Mortalsjourney;
+    public GameObject mortalsjourney { get => Mortalsjourney; set => Mortalsjourney = value; }
 
-    public float skillqibonus;
-    public int skillweb;
+    [SerializeField] private GameObject Qimanipulation;
+    public GameObject qimanipulation { get => Qimanipulation; set => Qimanipulation = value; }
+
+    [SerializeField] private int Amountskills;
+    public int amountskills { get => Amountskills; set => Amountskills = value; }
+
+    [SerializeField] private string[] Skillsname;
+    public string[] skillsname { get => Skillsname; set => Skillsname = value; }
+
+    [SerializeField] private string[] Skillsinfo;
+    public string[] skillsinfo { get => Skillsinfo; set => Skillsinfo = value; }
+
+    //[SerializeField] private float[] Skills;
+    //public float[] skills { get => Skills; set => Skills = value; }
+
+    [SerializeField] private int[] Skillslvl;
+    public int[] skillslvl { get => Skillslvl; set => Skillslvl = value; }
+
+    [SerializeField] private Text[] Skillslvltxt;
+    public Text[] skillslvltxt { get => Skillslvltxt; set => Skillslvltxt = value; }
+
+    [SerializeField] private float[] Skillsxp;
+    public float[] skillsxp { get => Skillsxp; set => Skillsxp = value; }
+
+    [SerializeField] private float[] Skillsmaxxp;
+    public float[] skillsmaxxp { get => Skillsmaxxp; set => Skillsmaxxp = value; }
+
+    [SerializeField] private int[] Skillspointcost;
+    public int[] skillspointcost { get => Skillspointcost; set => Skillspointcost = value; }
+
+    [SerializeField] private float Skillqibonus;
+    public float skillqibonus { get => Skillqibonus; set => Skillqibonus = value; }
+
+    [SerializeField] private int Skillweb;
+    public int skillweb { get => Skillweb; set => Skillweb = value; }
     // Start is called before the first frame update
     void Start()
     {

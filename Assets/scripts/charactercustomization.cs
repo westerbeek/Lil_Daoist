@@ -41,7 +41,8 @@ public class charactercustomization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        updatemodel();   
+        updatemodel();
+        GameObject.Find("Newgame").SetActive(false);
     }
 
     // Update is called once per frame

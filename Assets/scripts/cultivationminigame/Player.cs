@@ -4,24 +4,50 @@ using UnityEngine;
 
 public class Player : stats
 {
-    public bool newgame;
-    public bool seenintro;
-    public bool olddatafound;//TODO check save
-    public GameObject scripthub;
-    public GameObject weightobj;
-    
-    public string[] titles;
-    public string[] paths;
+    [SerializeField] private bool Newgame;
+    public bool newgame { get => Newgame; set => Newgame = value; }
 
-    public int amountplayermodels;
-    public Animator[] playeranimation;
-    public GameObject bookanimation;
-    public float booktimer;
-    float maxbooktimer;
-    float bookrecharge;
-    public Vector2 oldplayercoords;
-    public Vector2 currentplayercoords;
-    public Vector2 heading2;
+    [SerializeField] private bool Seenintro;
+    public bool seenintro { get => Seenintro; set => Seenintro = value; }
+
+    [SerializeField] private bool Olddatafound;
+    public bool olddatafound { get => Olddatafound; set => Olddatafound = value; }
+
+    [SerializeField] private GameObject Weightobj;
+    public GameObject weightobj { get => Weightobj; set => Weightobj = value; }
+
+    [SerializeField] private string[] Titles;
+    public string[] titles { get => Titles; set => Titles = value; }
+
+    [SerializeField] private string[] Paths;
+    public string[] paths { get => Paths; set => Paths = value; }
+
+    [SerializeField] private int Amountplayermodels;
+    public int amountplayermodels { get => Amountplayermodels; set => Amountplayermodels = value; }
+
+    [SerializeField] private Animator[] Playeranimation;
+    public Animator[] playeranimation { get => Playeranimation; set => Playeranimation = value; }
+
+    [SerializeField] private GameObject Bookanimation;
+    public GameObject bookanimation { get => Bookanimation; set => Bookanimation = value; }
+
+    [SerializeField] private float Booktimer;
+    public float booktimer { get => Booktimer; set => Booktimer = value; }
+
+    [SerializeField] private float Maxbooktimer;
+    public float maxbooktimer { get => Maxbooktimer; set => Maxbooktimer = value; }
+
+    [SerializeField] private float Bookrecharge;
+    public float bookrecharge { get => Bookrecharge; set => Bookrecharge = value; }
+
+    [SerializeField] private Vector2 Oldplayercoords;
+    public Vector2 oldplayercoords { get => Oldplayercoords; set => Oldplayercoords = value; }
+
+    [SerializeField] private Vector2 Currentplayercoords;
+    public Vector2 currentplayercoords { get => Currentplayercoords; set => Currentplayercoords = value; }
+
+    [SerializeField] private Vector2 Heading2;
+    public Vector2 heading2 { get => Heading2; set => Heading2 = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +72,8 @@ public class Player : stats
         //stats
         maxhealth = 100;
         health = maxhealth;
+        maxenergy = 100;
+        energy = maxenergy;
         physicalattack = 1;
         physicaldefence = 1;
         mentalattack = 1;
@@ -157,7 +185,7 @@ public class Player : stats
             upgragepoints += 1;
             maxinspirationxp += maxinspirationxp / 15;
         }
-        scripthub.GetComponent<Cultivation>().Xp += passiveqi;
+        scripthub.GetComponent<Cultivation>().Giftxp(passiveqi, false);
         //animationoff
     }
 

@@ -7,6 +7,11 @@ public class Combatcard : MonoBehaviour
 {
     public Sprite cardimage;
     private combatmanager cmanager;
+    public combatmanager CManager
+    {
+        get { return cmanager; }
+        set { cmanager = value; }
+    }
     [TextArea(1,3)]
     public string name;
     [TextArea(15, 20)]

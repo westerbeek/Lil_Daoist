@@ -8,99 +8,135 @@ using UnityEngine.EventSystems;
 
 public class UImanager : MonoBehaviour
 {
-    public GameObject scripthub;
-    public TextAsset skillinfotxtfile;
-    public GameObject maincam;
+    private GameObject scripthub;
+    private TextAsset skillinfotxtfile;
+    private GameObject maincam;
 
-    public TextAsset cultivationinfotxtfile;
-    public string[] cultivationinfotxt;
+    private TextAsset cultivationinfotxtfile;
+    private string[] cultivationinfotxt;
 
-    public Image bgenclosure;
-    public Animator bgenimator;
-    public bool pulse;
+    private Image bgenclosure;
+    private Animator bgenimator;
+    private bool pulse;
     //bgenclosure
-    public GameObject enclosurecanvasobj;
-    
+    private GameObject enclosurecanvasobj;
+
     //Maincanvass
-    public GameObject maincanvasobj;
-    public bool inforealmbool;
+    private GameObject maincanvasobj;
+    private bool inforealmbool;
     private bool cultivatable;
 
-    public Image cultbuttonimage;
-    public Image cross;//of cultivation button
-    public Text realmtxt;
-    public Text realminfotxt;
-    public Image mainBar;
-    public GameObject cultbutton;
+    private Image cultbuttonimage;
+    private Image cross;//of cultivation button
+    private Text realmtxt;
+    private Text realminfotxt;
+    private Image mainBar;
+    private GameObject cultbutton;
     private float realminfocontenty;
-    public GameObject upinfo;
-    public GameObject downinfo;
+    private GameObject upinfo;
+    private GameObject downinfo;
     private GameObject realminfoimage;
-    GameObject bottombar;
+    private GameObject bottombar;
 
-    public Image inspirationbar;
-    public Text inspirationbartxt;
+    private Image inspirationbar;
+    private Text inspirationbartxt;
 
     //playerinfo
-    public GameObject playerinfocanvas;
-    public bool playerinfobool;
-    public Text playername;
-    public Text playerrealm;
-    public Text playersubrealm;
-    public Text playerqigeneration;
-    public Text statstxt;
-
+    private GameObject playerinfocanvas;
+    private bool playerinfobool;
+    private Text playername;
+    private Text playerrealm;
+    private Text playersubrealm;
+    private Text playerqigeneration;
+    private Text statstxt;
 
     //skillscreen
-    public GameObject playerskillscanvas;
-    public bool playerskillbool;
-    public GameObject mortalsjourneyskillsmenu;
-    public GameObject qigatheringskillsmenu;
-    public Image inspirskillbar;
-    public Text skillinspirlvl;
-    public Text skillinspirpercentage;
+    private GameObject playerskillscanvas;
+    private bool playerskillbool;
+    private GameObject mortalsjourneyskillsmenu;
+    private GameObject qigatheringskillsmenu;
+    private Image inspirskillbar;
+    private Text skillinspirlvl;
+    private Text skillinspirpercentage;
     //skillinfowindow
-    public GameObject skillinfoobj;
-    public int sellectecskill;
-    public Image skillicon;
-    public Image skillxp;
-    public Text skillxptxt;
-    public Image buyfill;
-    public Text skillnametxt;
-    public Text skillinfotxt;
-    public Text skillvltxt;
-    public Text skillcosttxt;
-    public float maxpurchasing;
-    public float purchasing;
-    public bool purchasingbool;
+    private GameObject skillinfoobj;
+    private int sellectecskill;
+    private Image skillicon;
+    private Image skillxp;
+    private Text skillxptxt;
+    private Image buyfill;
+    private Text skillnametxt;
+    private Text skillinfotxt;
+    private Text skillvltxt;
+    private Text skillcosttxt;
+    private float maxpurchasing;
+    private float purchasing;
+    private bool purchasingbool;
 
     //adventure canvas
-    public GameObject adventuremodeobj;
-    public GameObject adventurecanvas;
-    public bool adventurebool;
-    public GameObject adventureactivate;
-    public GameObject adventurecam;
-    public GameObject adventuringcanvas;
-    public Text Progressionbartxt;
-    public GameObject Adventurechoices;
-    public bool choicesenable;
-    public adventureeventhub adeventhub;
-    public string eventtype;
+    private GameObject adventuremodeobj;
+    private GameObject AdventureCanvas;
+    public GameObject adventurecanvas
+    {
+        get { return AdventureCanvas; }
+        set { AdventureCanvas = value; }
+    }
+    private bool AdventureBool;
+    public bool adventurebool
+    {
+        get { return AdventureBool; }
+        set { AdventureBool = value; }
+    }
+    private GameObject adventureactivate;
+    private GameObject AdventureCam;
+    [SerializeField]public GameObject adventurecam
+    {
+        get { return AdventureCam; }
+        set { AdventureCam = value; }
+    }
+    private GameObject AdventuringCanvas;
+    public GameObject adventuringcanvas
+    {
+        get { return AdventuringCanvas; }
+        set { AdventuringCanvas = value; }
+    }
+    private Text Progressionbartxt;
+    private GameObject AdventureChoices;
+    public GameObject Adventurechoices
+    {
+        get { return AdventureChoices; }
+        set { AdventureChoices = value; }
+    }
+    private bool ChoicesEnable;
+    public bool choicesenable
+    {
+        get { return ChoicesEnable; }
+        set { ChoicesEnable = value; }
+    }
+    private adventureeventhub adeventhub;
+    private string EventType;
+    public string eventtype
+    {
+        get { return EventType; }
+        set { EventType = value; }
+    }
     //inv
-    public GameObject inventorycanvas;
-    public Inventory inv;
-    public Equipment equip;
-    public bool invbool;
+    private GameObject inventorycanvas;
+    private Inventory inv;
+    private Equipment equip;
+    private bool invbool;
     //rewardscreen
-    public GameObject rewardcanvas;
-    public rewards rewardscript;
+    private GameObject rewardcanvas;
+    private rewards rewardscript;
     // Start is called before the first frame update
     void Awake()
     {
         scripthub = GameObject.Find("ScriptHub");
         maincam = GameObject.Find("Main Camera");
-        splitText(cultivationinfotxtfile);
-        skillinfosplitText(skillinfotxtfile);
+        cultivationinfotxtfile = Resources.Load<TextAsset>("text/Cultivationranksinfo");
+        skillinfotxtfile = Resources.Load<TextAsset>("text/skillinfotext");
+        //splitText(cultivationinfotxtfile);
+       // skillinfosplitText(skillinfotxtfile);
 
         //enclosure
         enclosurecanvasobj = GameObject.Find("enclosure");
@@ -177,11 +213,11 @@ public class UImanager : MonoBehaviour
         adventuremodeobj = GameObject.Find("adventuremodescripts");
 
         adventurecanvas = GameObject.Find("Adventurecanvas");
-        adventurecam = GameObject.Find("adventurecam");
+        AdventureCam = GameObject.Find("adventurecam");
         adventureactivate = GameObject.Find("adventurepaths");
         adventuringcanvas = GameObject.Find("Adventuringwalkcanvas");
         Adventurechoices = GameObject.Find("choices");
-        choicesenable = false;
+        ChoicesEnable = false;
         adeventhub = GameObject.Find("adventuremodescripts").GetComponent<adventureeventhub>();
         adeventhub.UIhub = this;
         if (adventurecanvas != null)
@@ -196,6 +232,7 @@ public class UImanager : MonoBehaviour
         }
         //Inventory
         inv = this.gameObject.GetComponent<Inventory>();
+        inv.Iteminfo = GameObject.Find("Iteminfo");
 
         inv.equipmentslotimages = new Image[17];
         inv.equipslots = new GameObject[17];
