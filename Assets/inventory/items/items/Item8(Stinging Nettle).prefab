@@ -49,9 +49,11 @@ MonoBehaviour:
   Quality: 1
   rarity: 1
   stackable: 0
-  amount: 0
+  amount: 1
   maxamount: 20
   description: A normal herb you can find by the side of the road
+  stattext: 
+  Specialfeatures: 
   icon: {fileID: 21300000, guid: 52e514df1ac6d694691955e05d4e2555, type: 3}
   type: 2
   subtype1: 1

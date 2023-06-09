@@ -725,18 +725,96 @@ public class Inventory : MonoBehaviour
 
         }
     }
+    public void invfix()
+    {
+        for (int i = 0; i < equipslots.Length; i++)
+        {
+            for (int b = 0; b < itemdatabase.Itemlist.Length; b++)//goes through database
+            {
+                Debug.Log("database fix");
+                if (itemdatabase.Itemlist[b] != null)//
+                {
+                    if (itemdatabase.Itemlist[b].id == equipment[i].id)//if it finds the item its looking for it copies it into the newitem
+                    {
+                        Debug.Log("item found in database fix" + equipment[i].id);
+                        //newitem = itemdatabase.Itemlist[i];
+                        int tmpamount = equipment[i].amount;
+                        int tmpquality = equipment[i].Quality;
 
-    private void invupdate()
+                        overideitem(equipment[i], itemdatabase.Itemlist[b]);
+                        equipment[i].amount = tmpamount;
+                        equipment[i].Quality = tmpquality;
+                        Debug.Log("save overide Equipment");
+                        Debug.Log("222Equipment found in database fix222" + equipment[i].id);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("saved Equipment not found");//stops game incase item doesnt exist
+                }
+            }
+        }
+        
+        for (int i = 0; i < amountinvslots; i++)
+        {
+            Debug.Log("inv fix");
+            if (items[i].id != 0)
+            {
+                Debug.Log("inv fix222");
+
+                for (int b = 0; b < itemdatabase.Itemlist.Length; b++)//goes through database
+                {
+                    Debug.Log("database fix");
+
+                    if (itemdatabase.Itemlist[b] != null)//
+                    {
+
+                        if (itemdatabase.Itemlist[b].id == items[i].id)//if it finds the item its looking for it copies it into the newitem
+                        {
+                            Debug.Log("item found in database fix"+ items[i].id);
+                            
+                            //newitem = itemdatabase.Itemlist[i];
+                            int tmpamount = items[i].amount;
+                            int tmpquality = items[i].Quality;
+                        
+                            overideitem(items[i], itemdatabase.Itemlist[b]);
+                            items[i].amount = tmpamount;
+                            items[i].Quality = tmpquality;
+                            Debug.Log("save overide item");
+                            Debug.Log("222item found in database fix222"+ items[i].id);
+
+
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("saved Item not found");//stops game incase item doesnt exist
+                    }
+                }
+            }
+        }
+        //invupdate();
+        updateamount();
+        UpdateImage();
+    }
+    public void invupdate()
     {
         for (int i = 0; i < amountinvslots; i++)
         {
             if (items[i].id != 0)
             {
+                Debug.Log("inv update2");
+                
                 if (items[i].amount <= 0)
                 {
-                  items[i] = new Item();
+                    Item tmp = new Item();
+                    Debug.Log("inv update0");
+
+                    overideitem(items[i], tmp);
                 }
+
             }
+        
         }
         
         updateamount();
@@ -754,6 +832,7 @@ public class Inventory : MonoBehaviour
             else
             {
                 slots[i].GetComponentInChildren<TMP_Text>().text = "";
+                Debug.Log("update amount");
 
             }
 
@@ -762,11 +841,15 @@ public class Inventory : MonoBehaviour
     void UpdateImage()
     {
         for (int i = 0; i < slotimages.Length; i++)
-        {
+        { 
+                Debug.Log("set image");
+
             if (items[i].id != 0)
             {
                 slotimages[i].sprite = items[i].icon;
                 slotimages[i].enabled = true;
+                Debug.Log("set image");
+
             }
             else
             {
@@ -796,6 +879,8 @@ public class Inventory : MonoBehaviour
                     equipmentslotimages[i].enabled = false;
                 }
             }
+            Debug.Log("set equip");
+
         }
     }
 }

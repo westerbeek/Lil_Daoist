@@ -49,9 +49,11 @@ MonoBehaviour:
   Quality: 2
   rarity: 3
   stackable: 0
-  amount: 0
+  amount: 1
   maxamount: 1
   description: A slightly special stick, you feel some energy coming from it.
+  stattext: 
+  Specialfeatures: 
   icon: {fileID: 21300000, guid: 1b56c8562b8330e4ea2e4f8fffe421b5, type: 3}
   type: 3
   subtype1: 5

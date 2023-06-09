@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+
 public static class BinarySaveLoadSystem
 {
     public static void Save(string filePath, Dictionary<string, object> data)

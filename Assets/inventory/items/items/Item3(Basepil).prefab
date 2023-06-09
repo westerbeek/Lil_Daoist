@@ -49,9 +49,11 @@ MonoBehaviour:
   Quality: 0
   rarity: 3
   stackable: 1
-  amount: 0
+  amount: 1
   maxamount: 30
   description: A pill made using alchemy
+  stattext: 
+  Specialfeatures: 
   icon: {fileID: 21300000, guid: 133da607b0b63cc45a240df69aad8262, type: 3}
   type: 1
   subtype1: 24
