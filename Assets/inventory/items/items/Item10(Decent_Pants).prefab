@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7778535254091753555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7778535254091753549}
+  - component: {fileID: -2685858609884374631}
+  m_Layer: 0
+  m_Name: Item10(Decent_Pants)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7778535254091753549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778535254091753555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00024414062, y: 423.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2685858609884374631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778535254091753555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d782f11cc32df409696f358225e744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 10
+  name: Decent pants
+  Quality: 5
+  rarity: 1
+  stackable: 0
+  amount: 1
+  maxamount: 1
+  description: 'A decent pair of pants, shame they only come in this color.
+
+
+    Very
+    decently made.
+
+    From decent materials.,
+
+    By a decent craftsman,
+
+    With
+    decent craftsmanship,
+
+    In a decent place,
+
+    with decent tools.'
+  stattext: 
+  Specialfeatures: 
+  icon: {fileID: 0}
+  type: 6
+  subtype1: 9
+  subtype2: 0
+  subtype3: 0
+  fortitude: 0
+  strength: 0
+  dexterity: 0
+  inteligence: 0
+  karma: 0
+  luck: 0
+  xpbonus: 0
+  physicalattack: 0
+  physicaldefence: 1
+  mentalattack: 0
+  mentaldefence: 1
+  specialattack: 0
+  specialdefence: 0
+  fireattack: 0
+  firedefence: 0
+  waterattack: 0
+  waterdefence: 0
+  woodattack: 0
+  wooddefence: 0
+  earthattack: 0
+  earthdefence: 0
+  metalattack: 0
+  metaldefence: 0

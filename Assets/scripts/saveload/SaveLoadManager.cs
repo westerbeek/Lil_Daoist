@@ -210,5 +210,6 @@ public class SaveLoadManager : MonoBehaviour
     public void destroysave()
     {
         BinarySaveLoadSystem.DestroySave(filePath);
+        Debug.Log("Save Successfully destroyed");
     }
 }
