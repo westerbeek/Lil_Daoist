@@ -183,7 +183,7 @@ public class adventuremode : MonoBehaviour
         Map.rectTransform.localScale = new Vector3(targetSize, targetSize, 1);
         Ingameplayerlocicon.transform.parent = Map.transform;
        Ingameplayerlocicon.GetComponent<RectTransform>().localPosition = player.currentplayercoords;
-        Debug.Log("");
+ 
     }
     void checkdiscovered()
     {

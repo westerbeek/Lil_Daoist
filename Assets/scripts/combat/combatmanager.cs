@@ -189,7 +189,7 @@ public class combatmanager : MonoBehaviour
                 script.description = playerhand[i].description;
                 script.energyCost = playerhand[i].energyCost;
 
-                TMP_Text cardNameText = tmpcard.transform.Find("Cardname").GetComponent<TMP_Text>();
+                TMP_Text cardNameText = tmpcard.transform.Find("cardimageslot").transform.Find("Cardname").GetComponent<TMP_Text>();
                 TMP_Text cardDescriptionText = tmpcard.transform.Find("Carddescription").GetComponent<TMP_Text>();
                 TMP_Text costText = tmpcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>();
                 Image cardImage = tmpcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>();
@@ -453,7 +453,7 @@ public class combatmanager : MonoBehaviour
                 Bigcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>().text = "" + playerhand[F].energyCost;
                 Bigcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>().sprite = playerhand[F].cardimage;
 
-                Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text = playerhand[F].name;
+                Bigcard.transform.Find("cardimageslot").transform.Find("Cardname").GetComponent<TMP_Text>().text = playerhand[F].name;
                 BigcardCastbutton.GetComponent<Button>().onClick.RemoveAllListeners();
                 BigcardCastbutton.GetComponent<Button>().onClick.AddListener(() => usecard(whoseturn, playerhand[F]));
                 Bigcard.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
@@ -466,13 +466,13 @@ public class combatmanager : MonoBehaviour
             Bigcard.SetActive(true);
             BigcardCastbutton.SetActive(false);
 
-            if (Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text != enemyhand[F].name)
+            if (Bigcard.transform.Find("cardimageslot").transform.Find("Cardname").GetComponent<TMP_Text>().text != enemyhand[F].name)
             {
                 Bigcard.transform.Find("Carddescription").GetComponent<TMP_Text>().text = enemyhand[F].description;
                 Bigcard.transform.Find("Costbg").transform.Find("Costtxt").GetComponent<TMP_Text>().text = "" + enemyhand[F].energyCost;
                 Bigcard.transform.Find("cardimageslot").transform.Find("cardimage").GetComponent<Image>().sprite = enemyhand[F].cardimage;
 
-                Bigcard.transform.Find("Cardname").GetComponent<TMP_Text>().text = enemyhand[F].name;
+                Bigcard.transform.Find("cardimageslot").transform.Find("Cardname").GetComponent<TMP_Text>().text = enemyhand[F].name;
                 Bigcard.GetComponent<Image>().color = new Color32(255,100,100,255);
             }
             showenemycard = true;

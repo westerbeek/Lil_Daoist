@@ -60,7 +60,7 @@ MonoBehaviour:
   Specialfeatures: 
   icon: {fileID: 21300000, guid: 1fbbcb844e433824a92d49d1576bb8a2, type: 3}
   type: 6
-  subtype1: 9
+  subtype1: 10
   subtype2: 0
   subtype3: 0
   fortitude: 0

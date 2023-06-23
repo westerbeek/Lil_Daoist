@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -38,6 +39,10 @@ public class SaveLoadManager : MonoBehaviour
     }
     public void Update()
     {
+        if(DateTime.UtcNow.Millisecond % 5000 == 0)
+        {
+            SaveData();
+        }
         if (Input.GetKeyDown(KeyCode.P))
         {
             SaveData();
@@ -56,7 +61,8 @@ public class SaveLoadManager : MonoBehaviour
                 {
                     if (DontLoadDataAtStart == false)
                     {
-                      //  LoadData();
+                        LoadData();
+
 
                         Debug.Log("loading data");
                     }
@@ -155,15 +161,11 @@ public class SaveLoadManager : MonoBehaviour
         data.Add("subrealm", scripthub.GetComponent<Cultivation>().Subrealm);
        
         //offline production
-        data.Add("oldyear", scripthub.GetComponent<offlinecalc>().currentyear);
-        data.Add("oldmonth", scripthub.GetComponent<offlinecalc>().currentmonth);
-        data.Add("oldday", scripthub.GetComponent<offlinecalc>().currentday);
-        data.Add("oldhour", scripthub.GetComponent<offlinecalc>().currenthour);
-        data.Add("oldminute", scripthub.GetComponent<offlinecalc>().currentminute);
-        data.Add("oldsecond", scripthub.GetComponent<offlinecalc>().currentsecond);
+        data.Add("oldtime", scripthub.GetComponent<offlinecalc>().OldTime);
 
 
         BinarySaveLoadSystem.Save(filePath, data);
+        Debug.Log("Data Saved");
     }
 
     private void LoadData()
@@ -179,6 +181,55 @@ public class SaveLoadManager : MonoBehaviour
             {
                 scripthub.GetComponent<Player>().seenintro = (bool)data["seenintro"];
             }
+
+
+            scripthub.GetComponent<Player>().playerID = (string)data["playerid"];
+            scripthub.GetComponent<Player>().health = (float)data["phealth"];
+            scripthub.GetComponent<Player>().maxhealth = (float)data["pmaxhealth"];
+            scripthub.GetComponent<Player>().energy = (float)data["penergy"];
+            scripthub.GetComponent<Player>().maxenergy = (float)data["pmaxenergy"];
+            scripthub.GetComponent<Player>().fortitude = (float)data["pfortitude"];
+            scripthub.GetComponent<Player>().strength = (float)data["pstrength"];
+            scripthub.GetComponent<Player>().dexterity = (float)data["pdexterity"];
+            scripthub.GetComponent<Player>().inteligence = (float)data["pintelligence"];
+            scripthub.GetComponent<Player>().karma = (float)data["pkarma"];
+            scripthub.GetComponent<Player>().luck = (float)data["pluck"];
+            scripthub.GetComponent<Player>().physicalattack = (float)data["pphysicalattack"];
+            scripthub.GetComponent<Player>().physicaldefence = (float)data["pphysicaldefence"];
+            scripthub.GetComponent<Player>().mentalattack = (float)data["pmentalattack"];
+            scripthub.GetComponent<Player>().mentaldefence = (float)data["pmentaldefence"];
+            scripthub.GetComponent<Player>().specialattack = (float)data["pspecialattack"];
+            scripthub.GetComponent<Player>().specialdefence = (float)data["pspecialdefence"];
+            scripthub.GetComponent<Player>().fireattack = (float)data["pfireattack"];
+            scripthub.GetComponent<Player>().firedefence = (float)data["pfiredefence"];
+            scripthub.GetComponent<Player>().waterattack = (float)data["pwaterattack"];
+            scripthub.GetComponent<Player>().waterdefence = (float)data["pwaterdefence"];
+            scripthub.GetComponent<Player>().woodattack = (float)data["pwoodattack"];
+            scripthub.GetComponent<Player>().wooddefence = (float)data["pwooddefence"];
+            scripthub.GetComponent<Player>().earthattack = (float)data["pearthattack"];
+            scripthub.GetComponent<Player>().earthdefence = (float)data["pearthdefence"];
+            scripthub.GetComponent<Player>().metalattack = (float)data["pmetalattack"];
+            scripthub.GetComponent<Player>().metaldefence = (float)data["pmetaldefence"];
+            scripthub.GetComponent<Player>().perception = (float)data["pperception"];
+            scripthub.GetComponent<Player>().speed = (float)data["pspeed"];
+            scripthub.GetComponent<Player>().basedamage = (float)data["pbasedamage"];
+            scripthub.GetComponent<Player>().stealth = (float)data["pstealth"];
+            scripthub.GetComponent<Player>().cultivationknowledge = (float)data["pcultivationknowledge"];
+            scripthub.GetComponent<Player>().herbologyknowledge = (float)data["pherbologyknowledge"];
+            scripthub.GetComponent<Player>().talismanknowledge = (float)data["ptalismanknowledge"];
+            scripthub.GetComponent<Player>().rhunknowledge = (float)data["prhunknowledge"];
+            scripthub.GetComponent<Player>().alchemyknowledge = (float)data["palchemyknowledge"];
+            scripthub.GetComponent<Player>().craftingknowledge = (float)data["pcraftingknowledge"];
+            scripthub.GetComponent<Player>().talent = (float)data["ptalent"];
+            scripthub.GetComponent<Player>().minpassiveqi = (float)data["pminpassiveqi"];
+            scripthub.GetComponent<Player>().passiveqi = (float)data["ppassiveqi"];
+            scripthub.GetComponent<Player>().upgragepoints = (int)data["pupgragepoints"];
+            scripthub.GetComponent<Player>().inspirationxp = (float)data["pinspirationxp"];
+            scripthub.GetComponent<Player>().maxinspirationxp = (float)data["pmaxinspirationxp"];
+            scripthub.GetComponent<Player>().passiveinspirationxp = (float)data["ppassiveinspirationxp"];
+            scripthub.GetComponent<Player>().minpassiveinspirationxp = (float)data["pminpassiveinspirationxp"];
+            scripthub.GetComponent<Player>().seenintro = (bool)data["seenintro"];
+
             for (int i = 0; i < UIhub.GetComponent<Inventory>().items.Length; i++)
             {
                 UIhub.GetComponent<Inventory>().items[i].id = (int)data["Itemid"+i+""];
@@ -198,18 +249,15 @@ public class SaveLoadManager : MonoBehaviour
             scripthub.GetComponent<Cultivation>().Xp = (float)data["xp"];
 
 
-            scripthub.GetComponent<offlinecalc>().oldyear = (int)data["oldyear"];
-            scripthub.GetComponent<offlinecalc>().oldmonth = (int)data["oldmonth"];
-            scripthub.GetComponent<offlinecalc>().oldday = (int)data["oldday"];
-            scripthub.GetComponent<offlinecalc>().oldhour = (int)data["oldhour"];
-            scripthub.GetComponent<offlinecalc>().oldminute = (int)data["oldminute"];
-            scripthub.GetComponent<offlinecalc>().oldsecond = (int)data["oldsecond"];
-
+            scripthub.GetComponent<offlinecalc>().OldTime = (DateTime)data["oldtime"];
+            Debug.Log("old time: " + scripthub.GetComponent<offlinecalc>().OldTime);
+            scripthub.GetComponent<offlinecalc>().checkproduction();
         }
     }
     public void destroysave()
     {
         BinarySaveLoadSystem.DestroySave(filePath);
+        SceneManager.LoadScene("pregame");
         Debug.Log("Save Successfully destroyed");
     }
 }

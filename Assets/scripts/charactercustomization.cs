@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class charactercustomization : MonoBehaviour
 {
+    
     public GameObject scripthub;
 
     public int amountoutfits;
@@ -42,7 +43,6 @@ public class charactercustomization : MonoBehaviour
     void Start()
     {
         updatemodel();
-        GameObject.Find("Newgame").SetActive(false);
     }
 
     // Update is called once per frame

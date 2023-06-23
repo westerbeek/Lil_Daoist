@@ -98,6 +98,11 @@ public class rewards : MonoBehaviour
             Addrewards(2, "Spirit Stones", 23478, -1);
             Addrewards(5, "Slightly auspicious stick", 1, 27);
             Addrewards(6, "Slightly Ominous stick", 1, 23);
+            Addrewards(9, "Old Robe", 1, 1);
+            Addrewards(10, "Decent pants", 1, 5);
+            Addrewards(11, "Gloves", 1, 1);
+            Addrewards(12, "Belt of misty dew", 1, 5);
+            Addrewards(13, "Ring of beginnings", 1, 1);
         }
 
        
