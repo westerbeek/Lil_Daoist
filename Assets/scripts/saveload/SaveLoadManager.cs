@@ -257,6 +257,7 @@ public class SaveLoadManager : MonoBehaviour
     public void destroysave()
     {
         BinarySaveLoadSystem.DestroySave(filePath);
+        Destroy(GameObject.Find("SteamManagerer"));
         SceneManager.LoadScene("pregame");
         Debug.Log("Save Successfully destroyed");
     }

@@ -349,7 +349,7 @@ RectTransform:
   m_GameObject: {fileID: 595618691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.371, y: 13.371, z: 13.371}
+  m_LocalScale: {x: 13.370999, y: 13.370999, z: 13.370999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 942169000}
@@ -357,7 +357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00006113073, y: -0}
+  m_AnchoredPosition: {x: -0.00006113073, y: -0.00001335144}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595618693
@@ -435,7 +435,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -70.587, y: -94.1155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691602181
 MonoBehaviour:
@@ -502,7 +502,7 @@ RectTransform:
   m_GameObject: {fileID: 942168999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1729327, y: 1.1161879, z: 1.1161879}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 595618692}
@@ -514,8 +514,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000061035156, y: -13.66272}
+  m_SizeDelta: {x: 987.8972, y: -125.5732}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942169001
 MonoBehaviour:
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2d78093b519174847bae53e58df726fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b43a3cff9ae5ea49a281a3ecc0e80be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -683,7 +683,7 @@ RectTransform:
   m_GameObject: {fileID: 1180052593}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.371, y: 13.371, z: 13.371}
+  m_LocalScale: {x: 13.370999, y: 13.370999, z: 13.370999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 942169000}
@@ -691,7 +691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00006113073, y: -0}
+  m_AnchoredPosition: {x: -0.00006113073, y: -0.00001335144}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180052595
@@ -757,7 +757,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297868340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5.7745, y: 5.7745, z: 5.7745}
   m_ConstrainProportionsScale: 0
@@ -767,7 +767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0041351, y: -21.628117}
+  m_AnchoredPosition: {x: -0.0042137476, y: -21.628162}
   m_SizeDelta: {x: 295.05, y: 379.0407}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297868342
@@ -926,7 +926,7 @@ RectTransform:
   m_GameObject: {fileID: 1550654849}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.593709, y: 10.593709, z: 10.593709}
+  m_LocalScale: {x: 10.593708, y: 10.593708, z: 10.593708}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 942169000}
@@ -934,7 +934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00006113073, y: 39}
+  m_AnchoredPosition: {x: -0.00006113073, y: 39.000015}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550654851

@@ -4,13 +4,21 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System;
+using TMPro;
 using UnityEngine.EventSystems;
 
 public class UImanager : MonoBehaviour
 {
     private GameObject scripthub;
-    private TextAsset skillinfotxtfile;
+    [SerializeField]
+    public TextAsset skillinfotxtfile;
+    [SerializeField]
+
+    private string[] skillinfotxtstring;
+
     private GameObject maincam;
+
+    [SerializeField]
 
     private TextAsset cultivationinfotxtfile;
     private string[] cultivationinfotxt;
@@ -44,11 +52,11 @@ public class UImanager : MonoBehaviour
     //playerinfo
     private GameObject playerinfocanvas;
     private bool playerinfobool;
-    private Text playername;
-    private Text playerrealm;
-    private Text playersubrealm;
-    private Text playerqigeneration;
-    private Text statstxt;
+    private TMP_Text playername;
+    private TMP_Text playerrealm;
+    private TMP_Text playersubrealm;
+    private TMP_Text playerqigeneration;
+    private TMP_Text statstxt;
 
     //skillscreen
     private GameObject playerskillscanvas;
@@ -133,10 +141,10 @@ public class UImanager : MonoBehaviour
     {
         scripthub = GameObject.Find("ScriptHub");
         maincam = GameObject.Find("Main Camera");
-        cultivationinfotxtfile = Resources.Load<TextAsset>("text/Cultivationranksinfo");
-        skillinfotxtfile = Resources.Load<TextAsset>("text/skillinfotext");
-        //splitText(cultivationinfotxtfile);
-       // skillinfosplitText(skillinfotxtfile);
+        //cultivationinfotxtfile = Resources.Load<TextAsset>("text/Cultivationranksinfo");
+       // skillinfotxtfile = Resources.Load<TextAsset>("text/skillinfotext");
+       splitText(cultivationinfotxtfile);
+       skillinfosplitText(skillinfotxtfile);
 
         //enclosure
         enclosurecanvasobj = GameObject.Find("enclosure");
@@ -172,11 +180,11 @@ public class UImanager : MonoBehaviour
         playerinfocanvas = GameObject.Find("Playerinfocanvas");
         if (playerinfocanvas != null)
         {
-            playername = GameObject.Find("Playernametxt").GetComponent<Text>();
-            playerrealm = GameObject.Find("Playerrealmtxt").GetComponent<Text>();
-            playersubrealm = GameObject.Find("Playersubrealmtxt").GetComponent<Text>();
-            playerqigeneration = GameObject.Find("passiveQigentxt").GetComponent<Text>();//
-            statstxt = GameObject.Find("Playerstatstxt").GetComponent<Text>();
+            playername = GameObject.Find("Playernametxt").GetComponent<TMP_Text>();
+            playerrealm = GameObject.Find("Playerrealmtxt").GetComponent<TMP_Text>();
+            playersubrealm = GameObject.Find("Playersubrealmtxt").GetComponent<TMP_Text>();
+            playerqigeneration = GameObject.Find("passiveQigentxt").GetComponent<TMP_Text>();//
+            statstxt = GameObject.Find("Playerstatstxt").GetComponent<TMP_Text>();
             playerinfobool = false;
             playerinfocanvas.SetActive(false);
         }
@@ -321,8 +329,8 @@ public class UImanager : MonoBehaviour
 
         string temptxt2;
         temptxt2 = file.text.ToString();
-        skillz.skillsinfo = temptxt2.Split(new[] { "~~~" }, StringSplitOptions.RemoveEmptyEntries);
-        
+        skillinfotxtstring = temptxt2.Split(new[] { "~~~" }, StringSplitOptions.RemoveEmptyEntries);
+        skillz.skillsinfo = skillinfotxtstring;
 
 
     }
@@ -380,6 +388,7 @@ public class UImanager : MonoBehaviour
     }
     public void skillpointupdate()
     {
+   
         float inspirxp = scripthub.GetComponent<Player>().inspirationxp;
         float maxinspirxp = scripthub.GetComponent<Player>().maxinspirationxp;
         float inspirationpoints = scripthub.GetComponent<Player>().upgragepoints;
@@ -409,17 +418,25 @@ public class UImanager : MonoBehaviour
     }
     public void skillinfofunction(GameObject skill, int num)
     {
+      
         sellectecskill = num;
         maxpurchasing = 3;
         skills skillz = scripthub.GetComponent<skills>();
         skillinfoobj.SetActive(true);
-
+        skillicon = GameObject.Find("skillinfoiconimage").GetComponent<Image>();
+        skillxp = GameObject.Find("skillinfoiconbgxp").GetComponent<Image>();
+        skillxptxt = GameObject.Find("skillinfoxp").GetComponent<Text>();
+        buyfill = GameObject.Find("skillbuyfill").GetComponent<Image>();
+        skillnametxt = GameObject.Find("skillinfoname").GetComponent<Text>();
+        skillinfotxt = GameObject.Find("skillinfotext").GetComponent<Text>();
+        skillvltxt = GameObject.Find("skilllvltxt").GetComponent<Text>();
+        skillcosttxt = GameObject.Find("skillcosttxt").GetComponent<Text>();
         //skillicon.sprite = ;inspirskillbar.fillAmount = inspirxp / maxinspirxp;
         skillxp.fillAmount = skillz.skillsxp[sellectecskill] / skillz.skillsmaxxp[sellectecskill];
         skillxptxt.text = "" + skillz.skillsxp[sellectecskill] / skillz.skillsmaxxp[sellectecskill] * 100 + "%";
         buyfill.fillAmount = 0;
-        skillnametxt.text = skillz.skillsname[sellectecskill];
-        skillinfotxt.text = skillz.skillsinfo[sellectecskill];
+        skillnametxt.text = ""+skillz.skillsname[sellectecskill];
+        skillinfotxt.text = ""+skillz.skillsinfo[sellectecskill];
         skillvltxt.text = ""+skillz.skillslvl[sellectecskill] +"";
         skillcosttxt.text = "" + skillz.skillspointcost[sellectecskill] + "";
         purchasing = 0;
@@ -467,11 +484,27 @@ public class UImanager : MonoBehaviour
 
         if (playerinfobool == true)
         {
-            playername.text = "Health:"+ scripthub.GetComponent<Player>().health+" / "+ scripthub.GetComponent<Player>().maxhealth+ "\nName: "+ scripthub.GetComponent<Player>().playername;
+            playername.text = "\nName: "+ scripthub.GetComponent<Player>().playername;
+            GameObject.Find("Playerhealthtxt").GetComponent<TMP_Text>().text = "Health:" + scripthub.GetComponent<Player>().health + " / " + scripthub.GetComponent<Player>().maxhealth;
+            GameObject.Find("Playerenergytxt").GetComponent<TMP_Text>().text = "Energy:" + scripthub.GetComponent<Player>().health + " / " + scripthub.GetComponent<Player>().maxhealth;
             playerrealm.text = "Realm: " + scripthub.GetComponent<Cultivation>().Realmname;
             playersubrealm.text = "Subreal: " + scripthub.GetComponent<Cultivation>().Subrealmname;
             playerqigeneration.text = "Passive Qi Generation: " + scripthub.GetComponent<Player>().passiveqi.ToString() + "per tick";
-            statstxt.text = "physical attack: "+ scripthub.GetComponent<Player>().physicalattack.ToString() + "\nPhysical defence: "+ scripthub.GetComponent<Player>().physicaldefence.ToString() + "\nmental attack: " + scripthub.GetComponent<Player>().mentalattack.ToString() + "\nmental defence: " + scripthub.GetComponent<Player>().mentaldefence.ToString() + "\n";
+            //statstxt.text = "physical attack: "+ scripthub.GetComponent<Player>().physicalattack.ToString() + "\nPhysical defence: "+ scripthub.GetComponent<Player>().physicaldefence.ToString() + "\nmental attack: " + scripthub.GetComponent<Player>().mentalattack.ToString() + "\nmental defence: " + scripthub.GetComponent<Player>().mentaldefence.ToString() + "\n";
+            statstxt.text = "physical attack: " + scripthub.GetComponent<Player>().physicalattack.ToString() + "   Physical defence: " + scripthub.GetComponent<Player>().physicaldefence.ToString() + "\n" +
+        "mental attack: " + scripthub.GetComponent<Player>().mentalattack.ToString() + "   mental defence: " + scripthub.GetComponent<Player>().mentaldefence.ToString() + "\n" +
+        "special attack: " + scripthub.GetComponent<Player>().specialattack.ToString() + "   special defence: " + scripthub.GetComponent<Player>().specialdefence.ToString() + "\n\n" +
+        "fire attack: " + scripthub.GetComponent<Player>().fireattack.ToString() + "   fire defence: " + scripthub.GetComponent<Player>().firedefence.ToString() + "\n" +
+        "water attack: " + scripthub.GetComponent<Player>().waterattack.ToString() + "   water defence: " + scripthub.GetComponent<Player>().waterdefence.ToString() + "\n" +
+        "wood attack: " + scripthub.GetComponent<Player>().woodattack.ToString() + "   wood defence: " + scripthub.GetComponent<Player>().wooddefence.ToString() + "\n" +
+        "earth attack: " + scripthub.GetComponent<Player>().earthattack.ToString() + "   earth defence: " + scripthub.GetComponent<Player>().earthdefence.ToString() + "\n" +
+        "metal attack: " + scripthub.GetComponent<Player>().metalattack.ToString() + "   metal defence: " + scripthub.GetComponent<Player>().metaldefence.ToString() + "\n\n" +
+        "perception: " + scripthub.GetComponent<Player>().perception.ToString() + "   speed: " + scripthub.GetComponent<Player>().speed.ToString() + "\n" +
+        "base damage: " + scripthub.GetComponent<Player>().basedamage.ToString() + "   stealth: " + scripthub.GetComponent<Player>().stealth.ToString() + "\n\n" +
+        "cultivation knowledge: " + scripthub.GetComponent<Player>().cultivationknowledge.ToString() + "   herbology knowledge: " + scripthub.GetComponent<Player>().herbologyknowledge.ToString() + "\n" +
+        "talisman knowledge: " + scripthub.GetComponent<Player>().talismanknowledge.ToString() + "   rhun knowledge: " + scripthub.GetComponent<Player>().rhunknowledge.ToString() + "\n" +
+        "alchemy knowledge: " + scripthub.GetComponent<Player>().alchemyknowledge.ToString() + "   crafting knowledge: " + scripthub.GetComponent<Player>().craftingknowledge.ToString() + "\n" +
+        "talent: " + scripthub.GetComponent<Player>().talent.ToString();
         }
     }
     public void addventurecanvasfuction()
@@ -479,7 +512,7 @@ public class UImanager : MonoBehaviour
         adventurebool = !adventurebool;
         enclosurecanvasobj.SetActive(!adventurebool);
         adventurecanvas.SetActive(adventurebool);
-        maincanvasobj.SetActive(false);
+        maincanvasobj.SetActive(!adventurebool);
         maincam.SetActive(true);
         adventurecam.SetActive(false);
         adventuringcanvas.SetActive(false);

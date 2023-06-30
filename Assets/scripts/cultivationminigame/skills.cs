@@ -49,55 +49,55 @@ public class skills : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        amountskills = 10;
-        skillsobj = GameObject.FindGameObjectsWithTag("skillscreenskills");
-        skillsname = new string[amountskills];
-        skillsinfo = new string[amountskills];
-        skillsmaxxp = new float[amountskills];
-        skillslvl = new int[amountskills];
-        skillspointcost = new int[amountskills];
-        skillspointcost[0] = 1;
-        skillspointcost[1] = 1;
-        skillspointcost[2] = 1;
-        skillspointcost[3] = 1;
-        skillspointcost[4] = 1;
-        skillspointcost[5] = 1;
-        skillspointcost[6] = 1;
-        skillspointcost[7] = 1;
-        skillspointcost[8] = 1;
-        skillspointcost[9] = 1;//TODO
+        Amountskills = 10;
+        Skillsobj = GameObject.FindGameObjectsWithTag("skillscreenskills");
+        Skillsname = new string[Amountskills];
+        //Skillsinfo = new string[Amountskills];
+        Skillsmaxxp = new float[Amountskills];
+        Skillslvl = new int[Amountskills];
+        Skillspointcost = new int[Amountskills];
+        Skillspointcost[0] = 1;
+        Skillspointcost[1] = 1;
+        Skillspointcost[2] = 1;
+        Skillspointcost[3] = 1;
+        Skillspointcost[4] = 1;
+        Skillspointcost[5] = 1;
+        Skillspointcost[6] = 1;
+        Skillspointcost[7] = 1;
+        Skillspointcost[8] = 1;
+        Skillspointcost[9] = 1;//TODO
 
-        skillsxp = new float[amountskills];
-        skillsmaxxp = new float[amountskills];
-        skillsmaxxp[0] = 100;
-        skillsmaxxp[1] = 100;
-        skillsmaxxp[2] = 100;
-        skillsmaxxp[3] = 100;
-        skillsmaxxp[4] = 100;
-        skillsmaxxp[5] = 100;
-        skillsmaxxp[6] = 100;
-        skillsmaxxp[7] = 100;
-        skillsmaxxp[8] = 100;
-        skillsmaxxp[9] = 100;
+        Skillsxp = new float[Amountskills];
+        Skillsmaxxp = new float[Amountskills];
+        Skillsmaxxp[0] = 100;
+        Skillsmaxxp[1] = 100;
+        Skillsmaxxp[2] = 100;
+        Skillsmaxxp[3] = 100;
+        Skillsmaxxp[4] = 100;
+        Skillsmaxxp[5] = 100;
+        Skillsmaxxp[6] = 100;
+        Skillsmaxxp[7] = 100;
+        Skillsmaxxp[8] = 100;
+        Skillsmaxxp[9] = 100;
 
-        skillsname[1] = "Qi Sensing";
-        skillsname[2] = "Qi Refining";
-        skillsname[3] = "Qi Absorption";
-        skillsname[4] = "Strength";
-        skillsname[5] = "Intelligence";
-        skillsname[6] = "Perception";
-        skillsname[7] = "Qi sensing";
-        skillsname[8] = "Qi sensing";
-        skillsname[8] = "Qi sensing";
+        Skillsname[1] = "Qi Sensing";
+        Skillsname[2] = "Qi Refining";
+        Skillsname[3] = "Qi Absorption";
+        Skillsname[4] = "Strength";
+        Skillsname[5] = "Intelligence";
+        Skillsname[6] = "Perception";
+        Skillsname[7] = "Qi sensing";
+        Skillsname[8] = "Qi sensing";
+        Skillsname[8] = "Qi sensing";
     }
     void Update()
     {
-       skillqibonus = skillslvl[1] + skillslvl[2] + skillslvl[3] / 100;//gets added to cultivation passive qibase
-        for (int i = 0; i < skillslvltxt.Length; i++)
+       Skillqibonus = Skillslvl[1] + Skillslvl[2] + Skillslvl[3] / 100;//gets added to cultivation passive qibase
+        for (int i = 0; i < Skillslvltxt.Length; i++)
         {
             if (i != 0)
             {
-                skillslvltxt[i].text = "lvl: " + skillslvl[i];
+                Skillslvltxt[i].text = "lvl: " + Skillslvl[i];
             }
         }
     }
@@ -111,7 +111,7 @@ public class skills : MonoBehaviour
         string skillname = nameofskill.name;
         if(skillname == "Cultivationskill")//0
         {
-            if(skillweb == 0)
+            if(Skillweb == 0)
             {
 
             }
