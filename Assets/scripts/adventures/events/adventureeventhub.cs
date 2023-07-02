@@ -84,7 +84,7 @@ public class adventureeventhub : MonoBehaviour
 
         if (UIhub.eventtype == "Basic")
         {
-            eventID = Mathf.FloorToInt(Random.Range(0f, 2f));//TODO
+            eventID = Mathf.FloorToInt(Random.Range(0f, events.Length));//TODO make this random based on map area
             currentevent = Instantiate(events[eventID]);
             currentevent.transform.parent = GameObject.Find("Eventdatabase").transform;
         }

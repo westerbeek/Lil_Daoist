@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class event2herb1 : MonoBehaviour
 {
-    public adventureeventhub venturehub;
-    public string adventuretype;
+    private adventureeventhub venturehub;
+    private string adventuretype;
 
 
-    public bool permanent;
+    private bool permanent;
 
-    public string[] explanationtext;
-    public int randomness;
+    private string[] explanationtext;
+    private int randomness;
 
     // Start is called before the first frame update
     void Start()

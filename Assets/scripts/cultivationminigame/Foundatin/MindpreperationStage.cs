@@ -50,7 +50,7 @@ public class MindpreperationStage : MonoBehaviour
     public void Complete()
     {
         scripthub.GetComponent<Cultivation>().Giftxp(xpamountgivenMindprep,true);
-        scripthub.GetComponent<Cultivation>().Giftinspiration(xpamountgivenMindprep);
+        scripthub.GetComponent<Cultivation>().Giftinspiration(xpamountgivenMindprep * 3);
         //absorbed.SetActive(false);
         resetminigame();
     }

@@ -19,8 +19,8 @@ public class UImanager : MonoBehaviour
     private GameObject maincam;
 
     [SerializeField]
-
     private TextAsset cultivationinfotxtfile;
+    [SerializeField]
     private string[] cultivationinfotxt;
 
     private Image bgenclosure;
@@ -517,6 +517,7 @@ public class UImanager : MonoBehaviour
         adventurecam.SetActive(false);
         adventuringcanvas.SetActive(false);
 
+
     }
     public void addventurestart(int b)
     {
@@ -601,7 +602,16 @@ public class UImanager : MonoBehaviour
             if (scripthub.GetComponent<Cultivation>().Realm == 0)
             {
                 realmtxt.text = "" + scripthub.GetComponent<Cultivation>().Realmname+ "" + scripthub.GetComponent<Cultivation>().Subrealmname + "";
-                realminfotxt.text = cultivationinfotxt[1];
+                if (scripthub.GetComponent<Cultivation>().Subrealm == 0)
+                {
+                    realminfotxt.text = cultivationinfotxt[0];
+
+                }
+                if (scripthub.GetComponent<Cultivation>().Subrealm == 1)
+                {
+                    realminfotxt.text = cultivationinfotxt[1];
+
+                }
                 realminfotxt.enabled = true;
                 // content.GetComponent<RectTransform>().SetHeight(realmtxt.gameObject.GetComponent<RectTransform>().GetHeight() * 25.1f);
             }
@@ -610,22 +620,22 @@ public class UImanager : MonoBehaviour
                 realmtxt.text = "" + scripthub.GetComponent<Cultivation>().Realmname+ "" + scripthub.GetComponent<Cultivation>().Subrealmname + "";
                 if (scripthub.GetComponent<Cultivation>().Subrealm == 0)
                 {
-                    realminfotxt.text = cultivationinfotxt[1];
+                    realminfotxt.text = cultivationinfotxt[3];
 
                 }
                 if (scripthub.GetComponent<Cultivation>().Subrealm == 1)
                 {
-                    realminfotxt.text = "\n\n\nQi condensation realm is the realm that condenses the Qi from the air\n\nCurrently in the Qi sensing realm\n\nThis is obvious a bit of filler text and real lore will be written at a later time\n\nThis is mostly to see how much text can fit on here while still being readable on phones\n\nya di da di do\n\nDa be die, Da be die\nI'm blue\n\nWith much love\n\n~West\n\n\n\n";
+                    realminfotxt.text = cultivationinfotxt[4];
 
                 }
                 if (scripthub.GetComponent<Cultivation>().Subrealm == 2)
                 {
-                    realminfotxt.text = "\n\n\nQi refinement realm is the realm that refines the Qi\n\nCurrently in the Qi sensing realm\n\nThis is obvious a bit of filler text and real lore will be written at a later time\n\nThis is mostly to see how much text can fit on here while still being readable on phones\n\nya di da di do\n\nDa be die, Da be die\nI'm blue\n\nWith much love\n\n~West\n\n\n\n";
+                    realminfotxt.text = cultivationinfotxt[5];
 
                 }
                 if (scripthub.GetComponent<Cultivation>().Subrealm == 3)
                 {
-                    realminfotxt.text = "\n\n\nQi gathering realm is the realm that gathers the Qi\n\nCurrently in the Qi absorbtion realm\n\nThis is obvious a bit of filler text and real lore will be written at a later time\n\nThis is mostly to see how much text can fit on here while still being readable on phones\n\nya di da di do\n\nDa be die, Da be die\nI'm blue\n\nWith much love\n\n~West\n\n\n\n";
+                    realminfotxt.text = cultivationinfotxt[6];
                 }
                 realminfotxt.enabled = true;
 

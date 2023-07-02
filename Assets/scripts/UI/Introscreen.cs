@@ -65,7 +65,9 @@ public class Introscreen : MonoBehaviour
             }
             else
             {
-                scripthub.GetComponent<Player>().seenintro = true;
+                //scripthub.GetComponent<Player>().seenintro = true;
+                Fadebool = true;
+         
             }
         }
         if(scripthub.GetComponent<Player>().seenintro == true)

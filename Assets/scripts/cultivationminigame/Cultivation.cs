@@ -105,7 +105,7 @@ public class Cultivation : MonoBehaviour
     void mortalstrainingfunction()
     {
         realmname = "Mortal training:\n";
-        maxsubrealm = 3;
+        maxsubrealm = 2;//TODO ADD ANOTHER REALM CALLED AWAKENING
 
         if (subrealm == 0)//0
         {
@@ -113,7 +113,7 @@ public class Cultivation : MonoBehaviour
                                               //paths[0] = "Qi condensation";
             cultgamenumber = 3;
 
-            maxxp = 15;
+            maxxp = 100;
         }
         if (subrealm == 1)//0
         {
@@ -121,7 +121,7 @@ public class Cultivation : MonoBehaviour
                                               //paths[0] = "Qi condensation";
             cultgamenumber = 4;
 
-            maxxp = 20;
+            maxxp = 200;
         }
     }
 
@@ -136,7 +136,7 @@ public class Cultivation : MonoBehaviour
                                         //paths[0] = "Qi condensation";
             cultgamenumber = 2;
 
-            maxxp = 1000;
+            maxxp = 5000;
         }
         if (subrealm == 1)
         {
@@ -145,7 +145,7 @@ public class Cultivation : MonoBehaviour
                                             //paths[0] = "Qi condensation";
             cultgamenumber = 0;
 
-            maxxp = 1000;
+            maxxp = 20000;
 
         }
         if (subrealm == 2)//2
@@ -154,7 +154,7 @@ public class Cultivation : MonoBehaviour
             //paths[0] = "Qi condensation";
             cultgamenumber = 0;
 
-            maxxp = 1000;
+            maxxp = 50000;
         }
         if (subrealm == 3)
         {
@@ -162,7 +162,7 @@ public class Cultivation : MonoBehaviour
             //paths[0] = "Qi condensation";
             cultgamenumber = 1;
 
-            maxxp = 1000;
+            maxxp = 100000;
         }
         if (subrealm == 4)
         {
@@ -170,7 +170,7 @@ public class Cultivation : MonoBehaviour
             //paths[0] = "Qi condensation";
             cultgamenumber = 1;
 
-            maxxp = 1000;
+            maxxp = 99999000;
         }
     }
     public void breakthroughsuccess()
@@ -214,7 +214,7 @@ public class Cultivation : MonoBehaviour
     {
         GameObject ui = GameObject.Find("UIhub");
 
-        xp += gift;
+        xp += gift + this.GetComponent<Player>().bonusgiftqi;
         if (reward == true)
         {
             ui.GetComponent<UImanager>().bgreward();

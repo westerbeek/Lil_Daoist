@@ -514,6 +514,15 @@ public class combatmanager : MonoBehaviour
         }
     }
 
+    public void activatecombat()
+    {
+        combatarena.SetActive(true);
+        canvas.SetActive(true);
+
+        playerstats.health = playerstats.maxhealth;
+        enemystats.health = enemystats.maxhealth;
+        battlestart();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))

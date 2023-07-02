@@ -198,6 +198,20 @@ public class adventuremode : MonoBehaviour
                 Placesofinterests.Remove(Placesofinterests[i]);
             }
         }
+
+        //tmp
+        for (int i = 0; i < Eventlocations.Count; i++)
+        {
+            float distance = Vector2.Distance(Player.currentplayercoords, Eventlocations[i]);
+            if (distance <= 150)
+            {
+                Known[i] = true;
+            }
+            else
+            {
+                Known[i] = false;
+            }
+        }
     }
     public void gotowards(int c)
     {
@@ -208,21 +222,22 @@ public class adventuremode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            SetZoommap(Mathf.Clamp(Map.rectTransform.localScale.y * zoomscale, minSize, maxSize));
+            // Debug.Log("in" + Mathf.Clamp(Map.rectTransform.localScale.y * zoomscale, minSize, maxSize));
+        }
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            SetZoommap(Mathf.Clamp(Map.rectTransform.localScale.y / zoomscale, minSize, maxSize));
+            // Debug.Log("out" + Mathf.Clamp(Map.rectTransform.localScale.y / zoomscale, minSize, maxSize));
+
+        }
         if (Activated == true)
         {
             checkdiscovered();
 
-            if (Input.mouseScrollDelta.y > 0)
-            {
-                SetZoommap(Mathf.Clamp(Map.rectTransform.localScale.y * zoomscale, minSize, maxSize));
-               // Debug.Log("in" + Mathf.Clamp(Map.rectTransform.localScale.y * zoomscale, minSize, maxSize));
-            }
-            if (Input.mouseScrollDelta.y < 0)
-            {
-                SetZoommap(Mathf.Clamp(Map.rectTransform.localScale.y / zoomscale, minSize, maxSize));
-               // Debug.Log("out" + Mathf.Clamp(Map.rectTransform.localScale.y / zoomscale, minSize, maxSize));
-
-            }
+          
             Vector3[] corners = new Vector3[4];
             Map.rectTransform.GetWorldCorners(corners);
             Rect newRect = new Rect(corners[0], corners[2] - corners[0]);

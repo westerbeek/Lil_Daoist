@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class charactercustomization : MonoBehaviour
 {
 
     public string charactername;
 
+    public GameObject Maincanvas;
     public GameObject scripthub;
-
+    public TMP_InputField nametxt;
     public int amountoutfits;
     public GameObject[] heads;
     public Material[] faces;
@@ -46,17 +47,43 @@ public class charactercustomization : MonoBehaviour
     void Start()
     {
         updatemodel();
-        GameObject.Find("Newgame").SetActive(false);
+        nametxt = GameObject.Find("Nameinputfield").GetComponent<TMP_InputField>();
+        scripthub = GameObject.Find("ScriptHub");
+        Maincanvas = GameObject.Find("Maincanvas");
+        Maincanvas.SetActive(false);
+        if (scripthub.GetComponent<Player>().seenintro == true)
+        {
+            Maincanvas.SetActive(true);
+
+            GameObject.Find("Newgame").SetActive(false);
+
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        scripthub = GameObject.Find("ScriptHub");
+        if (scripthub.GetComponent<Player>().seenintro == true)
+        {
+            Maincanvas.SetActive(true);
+            if (GameObject.Find("Newgame") != null)
+            {
+                GameObject.Find("Newgame").SetActive(false);
+            }
+        }
+    }
+    public void confirm()
+    {
+        updatemodel();
+        scripthub.GetComponent<Player>().playername = nametxt.text;
+        scripthub.GetComponent<Player>().seenintro = true;
+        Maincanvas.SetActive(true);
+
+        GameObject.Find("Newgame").SetActive(false);
 
     }
-    void updatemodel()
+    public void updatemodel()
     {
         for (int i = 0; i < amountoutfits; i++)
         {

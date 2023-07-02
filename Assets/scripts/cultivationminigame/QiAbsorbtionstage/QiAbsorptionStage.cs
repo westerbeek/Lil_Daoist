@@ -93,11 +93,11 @@ public class QiAbsorptionStage : MonoBehaviour
 //        Debug.Log(nodouble.Count);
 
         absorbed = null;
-        required = Rhuns[Random.RandomRange(0, Rhuns.Length)];
+        required = Rhuns[Random.Range(0, Rhuns.Length)];
 
         for(int i = 0; i < nodouble.Count;i++)
         {
-            int newvalue= Random.RandomRange(0, rhuns.Length);
+            int newvalue= Random.Range(0, Rhunssprites.Length);
             if(nodouble.Contains(newvalue))
             {
                 i--;

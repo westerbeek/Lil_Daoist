@@ -79,13 +79,17 @@ public class SaveLoadManager : MonoBehaviour
     {
         Dictionary<string, object> data = new Dictionary<string, object>();
 
-    
 
 
-    //default = 0.01;
 
+        //default = 0.01;
+     
+        data.Add("chead", GameObject.Find("charcustomization").GetComponent<charactercustomization>().headint);
+        data.Add("cface", GameObject.Find("charcustomization").GetComponent<charactercustomization>().faceint);
+        data.Add("cbody", GameObject.Find("charcustomization").GetComponent<charactercustomization>().bodyint);
+        data.Add("carms", GameObject.Find("charcustomization").GetComponent<charactercustomization>().armint);
+        data.Add("clegs", GameObject.Find("charcustomization").GetComponent<charactercustomization>().legsint);
 
-    
 
         data.Add("playername", scripthub.GetComponent<Player>().playername);
         data.Add("playerid", scripthub.GetComponent<Player>().playerID);
@@ -182,6 +186,16 @@ public class SaveLoadManager : MonoBehaviour
                 scripthub.GetComponent<Player>().seenintro = (bool)data["seenintro"];
             }
 
+            GameObject charCustomization = GameObject.Find("charcustomization");
+            charactercustomization customizationScript = charCustomization.GetComponent<charactercustomization>();
+
+            customizationScript.headint = (int)data["chead"];
+            customizationScript.faceint = (int)data["cface"];
+            customizationScript.bodyint = (int)data["cbody"];
+            customizationScript.armint = (int)data["carms"];
+            customizationScript.legsint = (int)data["clegs"];
+
+            customizationScript.updatemodel();
 
             scripthub.GetComponent<Player>().playerID = (string)data["playerid"];
             scripthub.GetComponent<Player>().health = (float)data["phealth"];

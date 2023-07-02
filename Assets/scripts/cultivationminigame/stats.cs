@@ -59,6 +59,7 @@ public class stats : MonoBehaviour
     public float talent;
     public float minpassiveqi;
     public float passiveqi;//default = 0.01;
+    public float bonusgiftqi;//default = 0.01;
 
 
     public int upgragepoints;//inspiration

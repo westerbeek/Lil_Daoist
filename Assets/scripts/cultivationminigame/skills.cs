@@ -93,6 +93,7 @@ public class skills : MonoBehaviour
     void Update()
     {
        Skillqibonus = Skillslvl[1] + Skillslvl[2] + Skillslvl[3] / 100;//gets added to cultivation passive qibase
+        gameObject.GetComponent<Player>().bonusgiftqi = skillslvl[4] + skillslvl[5] + skillslvl[6]; ;
         for (int i = 0; i < Skillslvltxt.Length; i++)
         {
             if (i != 0)

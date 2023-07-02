@@ -49,6 +49,7 @@ public class Player : stats
     [SerializeField] private Vector2 Heading2;
     public Vector2 heading2 { get => Heading2; set => Heading2 = value; }
     // Start is called before the first frame update
+    public GameObject objplayermain;
     void Start()
     {
         
@@ -56,6 +57,7 @@ public class Player : stats
         bookrecharge = maxbooktimer;
         booktimer = maxbooktimer;
         scripthub = GameObject.Find("ScriptHub");
+        objplayermain = GameObject.Find("players");
         GameObject[] objplayers = GameObject.FindGameObjectsWithTag("Player");
         playeranimation = new Animator[objplayers.Length];
 
@@ -84,7 +86,7 @@ public class Player : stats
         scripthub = GameObject.Find("ScriptHub");
         maxinspirationxp = 100;//todo
         //float tmp = dexterity / 100;
-        adventuringspeed = .05f + (dexterity / 100);
+        adventuringspeed = .35f + (dexterity / 100);
     }
 
     // Update is called once per frame
@@ -97,6 +99,9 @@ public class Player : stats
         {
             if (scripthub.GetComponent<Cultivation>().Realm == 0)
             {
+
+                 //objplayermain.transform.rotation = Quaternion.Euler(objplayermain.transform.rotation.eulerAngles.x, 0f, objplayermain.transform.rotation.eulerAngles.z);
+
                 for (int i = 0; i < playeranimation.Length; i++)
                 {
                     playeranimation[i].SetBool("train", true);
@@ -111,12 +116,13 @@ public class Player : stats
                 
                 if (scripthub.GetComponent<Cultivation>().Subrealm == 1)
                 {
-                    bookanimation.transform.position = new Vector3(bookanimation.transform.position.x, 1.242f, bookanimation.transform.position.z);//1.24285
+                    bookanimation.transform.position = new Vector3(-76.9899979f, 0.418670416f, -40.9927521f);//1.24285
 
                     weightobj.SetActive(false);
                     for (int i = 0; i < playeranimation.Length; i++)
                     {
                         playeranimation[i].SetBool("read", true);
+                       // objplayermain.transform.rotation = Quaternion.Euler(objplayermain.transform.rotation.eulerAngles.x, -90f, objplayermain.transform.rotation.eulerAngles.z);
                     }
                     booktimer -= Time.deltaTime;
                     if (booktimer <= 0)
@@ -138,7 +144,7 @@ public class Player : stats
                 }
                 else
                 {
-                    bookanimation.transform.position = new Vector3(bookanimation.transform.position.x, 500, bookanimation.transform.position.z);//1.24285
+                    bookanimation.transform.position = new Vector3(bookanimation.transform.position.x, 5000, bookanimation.transform.position.z);//1.24285
 
                 }
 

@@ -21,6 +21,14 @@ public class bubblenotification : MonoBehaviour
     {
         notificationtype = "";
         UIhub = GameObject.Find("UIhub").GetComponent<UImanager>();
+        if (popup == null)
+        {
+            //Debug.Log("popup");
+            icon2 = GameObject.Find("bubbleicon.1").GetComponent<Image>();
+            icon1 = GameObject.Find("bubbleicon").GetComponent<Image>();
+            popup = GameObject.Find("bubble1");
+
+        }
     }
 
     void Update()
